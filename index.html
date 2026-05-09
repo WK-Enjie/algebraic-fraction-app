@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>FractoQuest 🧙</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SCREEN: Home -->
+  <div id="screen-home" class="screen active">
+    <div class="title-card">
+      <div class="wizard-emoji">🧙‍♂️</div>
+      <h1>FractoQuest</h1>
+      <p class="subtitle">Master Algebraic Fractions — Save the Realm!</p>
+    </div>
+    <div class="menu-buttons">
+      <button class="btn btn-primary" onclick="showScreen('screen-mode')">▶ Play</button>
+      <button class="btn btn-secondary" onclick="showScreen('screen-tutorial')">📖 How to Play</button>
+      <button class="btn btn-secondary" onclick="showScreen('screen-scores')">🏆 High Scores</button>
+    </div>
+    <div class="stars-display">
+      ⭐ Total Stars: <span id="total-stars-home">0</span>
+    </div>
+  </div>
+
+  <!-- SCREEN: Mode Select -->
+  <div id="screen-mode" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <h2>Choose Mode</h2>
+    </div>
+    <div class="mode-grid">
+      <div class="mode-card" onclick="startMode('quest')">
+        <div class="mode-icon">⚔️</div>
+        <h3>Quest</h3>
+        <p>Level by level adventure</p>
+        <div class="mode-progress" id="quest-progress">Level 1</div>
+      </div>
+      <div class="mode-card" onclick="startMode('learn')">
+        <div class="mode-icon">🏫</div>
+        <h3>Learn</h3>
+        <p>Step-by-step guidance</p>
+        <div class="mode-progress">Always available</div>
+      </div>
+      <div class="mode-card" onclick="startMode('speedrun')">
+        <div class="mode-icon">⏱️</div>
+        <h3>Speed Run</h3>
+        <p>60 seconds, max score!</p>
+        <div class="mode-progress" id="speed-best">Best: --</div>
+      </div>
+      <div class="mode-card" onclick="startMode('duel')">
+        <div class="mode-icon">🆚</div>
+        <h3>Duel</h3>
+        <p>2 players, same device</p>
+        <div class="mode-progress">Pass & Play</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Tutorial -->
+  <div id="screen-tutorial" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <h2>📖 How to Play</h2>
+    </div>
+    <div class="tutorial-slides" id="tutorial-slides">
+      <!-- Filled by JS -->
+    </div>
+    <div class="tutorial-nav">
+      <button class="btn btn-secondary" onclick="tutorialPrev()">← Prev</button>
+      <span id="tutorial-page">1 / 6</span>
+      <button class="btn btn-secondary" onclick="tutorialNext()">Next →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: Game -->
+  <div id="screen-game" class="screen">
+    <!-- HUD -->
+    <div class="hud">
+      <div class="hud-left">
+        <button class="btn-back" onclick="confirmQuit()">✕</button>
+        <div class="hud-level" id="hud-level">Level 1</div>
+      </div>
+      <div class="hud-center">
+        <div class="hud-score">⭐ <span id="hud-score">0</span></div>
+      </div>
+      <div class="hud-right">
+        <div class="hud-lives" id="hud-lives">❤️❤️❤️</div>
+        <div class="hud-timer" id="hud-timer" style="display:none">⏱️ <span id="timer-val">60</span></div>
+      </div>
+    </div>
+
+    <!-- Wizard & Spell Area -->
+    <div class="spell-area">
+      <div class="wizard-container">
+        <div class="wizard-sprite" id="wizard-sprite">🧙‍♂️</div>
+        <div class="speech-bubble" id="speech-bubble" style="display:none"></div>
+      </div>
+      <div class="question-number" id="question-number">Q 1 / 5</div>
+    </div>
+
+    <!-- Question Card -->
+    <div class="question-card" id="question-card">
+      <div class="question-label" id="question-label">Simplify:</div>
+      <div class="question-display" id="question-display">
+        <!-- Math rendered here -->
+      </div>
+      <div class="step-hint" id="step-hint" style="display:none"></div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+
+    <!-- Answer Area -->
+    <div class="answer-area" id="answer-area">
+      <!-- Dynamic: MCQ or Input -->
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-hint" id="btn-hint" onclick="showHint()">💡 Hint (-5pts)</button>
+      <button class="btn btn-check" id="btn-check" onclick="checkAnswer()" style="display:none">
+        ✓ Cast Spell!
+      </button>
+    </div>
+
+    <!-- Feedback Overlay -->
+    <div class="feedback-overlay" id="feedback-overlay" style="display:none">
+      <div class="feedback-box" id="feedback-box">
+        <div class="feedback-emoji" id="feedback-emoji"></div>
+        <div class="feedback-msg" id="feedback-msg"></div>
+        <div class="feedback-explanation" id="feedback-explanation"></div>
+        <button class="btn btn-primary" onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Level Complete -->
+  <div id="screen-level-complete" class="screen">
+    <div class="complete-card">
+      <div class="complete-emoji" id="complete-emoji">🎉</div>
+      <h2 id="complete-title">Level Complete!</h2>
+      <div class="star-rating" id="star-rating"></div>
+      <div class="complete-stats" id="complete-stats"></div>
+      <div class="complete-buttons">
+        <button class="btn btn-secondary" onclick="showScreen('screen-mode')">🗺️ Map</button>
+        <button class="btn btn-primary" id="btn-next-level" onclick="nextLevel()">Next Level ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Scores -->
+  <div id="screen-scores" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <h2>🏆 High Scores</h2>
+    </div>
+    <div id="scores-list" class="scores-list"></div>
+    <button class="btn btn-danger" onclick="clearScores()">🗑️ Clear Scores</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
