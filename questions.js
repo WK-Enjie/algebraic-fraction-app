@@ -1,9 +1,9 @@
 /* =============================================
    FRACTOQUEST — Question Banks
-   All levels, all questions, all explanations
+   All explanations use proper fracHTML rendering
    ============================================= */
 
-// ── HTML helpers (shared, used by questions.js, game.js, rewards.js) ──
+// ==================== HTML HELPERS ====================
 function fracHTML(num, den) {
   return `<span class="frac"><span class="num">${num}</span><span class="den">${den}</span></span>`;
 }
@@ -29,9 +29,8 @@ function shuffle(arr) {
   return a;
 }
 
-// ══════════════════════════════════════════════
-// QUESTION BANKS
-// ══════════════════════════════════════════════
+// ==================== QUESTION BANKS ====================
+
 const QuestionBanks = {
 
   // ─────────────────────────────────────────
@@ -131,7 +130,9 @@ const QuestionBanks = {
           ${arrowHTML()}
           ${stepFrac('2','3')}
         </div>
-        <div class="exp-note-box">⚠️ ${stepFrac('4','6')} is NOT fully simplified — divide again by 2!</div>
+        <div class="exp-note-box">
+          ⚠️ ${stepFrac('4','6')} is not fully simplified — divide again by 2!
+        </div>
         <div class="exp-answer">✅ Answer: ${stepFrac('2','3')}</div>
       `,
     },
@@ -199,6 +200,68 @@ const QuestionBanks = {
         <div class="exp-answer">✅ Answer: ${stepFrac('2','3')}</div>
       `,
     },
+    {
+      type: 'simplify',
+      label: 'Simplify fully:',
+      display: fracHTML('16', '24'),
+      answerText: '2/3',
+      correctIndex: 2,
+      points: 10,
+      options: [
+        { label: '4/8', html: fracHTML('4','8') },
+        { label: '4/6', html: fracHTML('4','6') },
+        { label: '2/3', html: fracHTML('2','3') },
+        { label: '8/12',html: fracHTML('8','12') },
+      ],
+      explanationHTML: `
+        <div class="exp-title">📝 Step-by-step solution</div>
+        <div class="exp-row">
+          <span class="exp-label">Given:</span>
+          ${stepFrac('16','24')}
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">GCF(16, 24) = <strong>8</strong></span>
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Divide both by 8:</span>
+          ${stepFrac('16 ÷ 8','24 ÷ 8')}
+          ${arrowHTML()}
+          ${stepFrac('2','3')}
+        </div>
+        <div class="exp-answer">✅ Answer: ${stepFrac('2','3')}</div>
+      `,
+    },
+    {
+      type: 'simplify',
+      label: 'Simplify fully:',
+      display: fracHTML('20', '35'),
+      answerText: '4/7',
+      correctIndex: 0,
+      points: 10,
+      options: [
+        { label: '4/7',  html: fracHTML('4','7') },
+        { label: '5/7',  html: fracHTML('5','7') },
+        { label: '2/7',  html: fracHTML('2','7') },
+        { label: '4/5',  html: fracHTML('4','5') },
+      ],
+      explanationHTML: `
+        <div class="exp-title">📝 Step-by-step solution</div>
+        <div class="exp-row">
+          <span class="exp-label">Given:</span>
+          ${stepFrac('20','35')}
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">GCF(20, 35) = <strong>5</strong></span>
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Divide both by 5:</span>
+          ${stepFrac('20 ÷ 5','35 ÷ 5')}
+          ${arrowHTML()}
+          ${stepFrac('4','7')}
+        </div>
+        <div class="exp-answer">✅ Answer: ${stepFrac('4','7')}</div>
+      `,
+    },
   ],
 
   // ─────────────────────────────────────────
@@ -225,7 +288,7 @@ const QuestionBanks = {
           ${stepFrac('6x²','9x')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Split parts:</span>
+          <span class="exp-label">Split into parts:</span>
           ${stepFrac('6','9')} ${opHTML('×')} ${stepFrac('x²','x')}
         </div>
         <div class="exp-row">
@@ -234,7 +297,8 @@ const QuestionBanks = {
         </div>
         <div class="exp-row">
           <span class="exp-label">Variables (x²÷x):</span>
-          ${stepFrac('x²','x')} ${arrowHTML()} <span class="exp-note">x</span>
+          ${stepFrac('x²','x')} ${arrowHTML()}
+          <span class="exp-note">x &nbsp;(power: 2−1=1)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
@@ -263,7 +327,7 @@ const QuestionBanks = {
           ${stepFrac('4a³','12a')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Split parts:</span>
+          <span class="exp-label">Split into parts:</span>
           ${stepFrac('4','12')} ${opHTML('×')} ${stepFrac('a³','a')}
         </div>
         <div class="exp-row">
@@ -271,8 +335,9 @@ const QuestionBanks = {
           ${stepFrac('4','12')} ${arrowHTML()} ${stepFrac('1','3')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Variables (3−1=2):</span>
-          ${stepFrac('a³','a')} ${arrowHTML()} <span class="exp-note">a²</span>
+          <span class="exp-label">Variables:</span>
+          ${stepFrac('a³','a')} ${arrowHTML()}
+          <span class="exp-note">a² &nbsp;(power: 3−1=2)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
@@ -302,19 +367,22 @@ const QuestionBanks = {
         </div>
         <div class="exp-row">
           <span class="exp-label">Split all parts:</span>
-          ${stepFrac('10','5')} ${opHTML('×')} ${stepFrac('x³','x')} ${opHTML('×')} ${stepFrac('y','y')}
+          ${stepFrac('10','5')} ${opHTML('×')} ${stepFrac('x³','x')}
+          ${opHTML('×')} ${stepFrac('y','y')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Numbers (÷5):</span>
           ${stepFrac('10','5')} ${arrowHTML()} <span class="exp-note">2</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">x-terms (3−1=2):</span>
-          ${stepFrac('x³','x')} ${arrowHTML()} <span class="exp-note">x²</span>
+          <span class="exp-label">x-terms:</span>
+          ${stepFrac('x³','x')} ${arrowHTML()}
+          <span class="exp-note">x² &nbsp;(3−1=2)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">y-terms:</span>
-          ${stepFrac('y','y')} ${arrowHTML()} <span class="exp-note">1 (cancels)</span>
+          ${stepFrac('y','y')} ${arrowHTML()}
+          <span class="exp-note">1 &nbsp;(cancels fully)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
@@ -343,20 +411,23 @@ const QuestionBanks = {
           ${stepFrac('15m²n','3mn²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Split parts:</span>
-          ${stepFrac('15','3')} ${opHTML('×')} ${stepFrac('m²','m')} ${opHTML('×')} ${stepFrac('n','n²')}
+          <span class="exp-label">Split all parts:</span>
+          ${stepFrac('15','3')} ${opHTML('×')} ${stepFrac('m²','m')}
+          ${opHTML('×')} ${stepFrac('n','n²')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Numbers (÷3):</span>
           ${stepFrac('15','3')} ${arrowHTML()} <span class="exp-note">5</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">m-terms (2−1=1):</span>
-          ${stepFrac('m²','m')} ${arrowHTML()} <span class="exp-note">m</span>
+          <span class="exp-label">m-terms:</span>
+          ${stepFrac('m²','m')} ${arrowHTML()}
+          <span class="exp-note">m &nbsp;(2−1=1)</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">n-terms (1−2= −1):</span>
+          <span class="exp-label">n-terms:</span>
           ${stepFrac('n','n²')} ${arrowHTML()} ${stepFrac('1','n')}
+          <span class="exp-note">&nbsp;(1−2 = −1)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
@@ -385,8 +456,9 @@ const QuestionBanks = {
           ${stepFrac('8p²q²','4pq')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Split parts:</span>
-          ${stepFrac('8','4')} ${opHTML('×')} ${stepFrac('p²','p')} ${opHTML('×')} ${stepFrac('q²','q')}
+          <span class="exp-label">Split all parts:</span>
+          ${stepFrac('8','4')} ${opHTML('×')} ${stepFrac('p²','p')}
+          ${opHTML('×')} ${stepFrac('q²','q')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Numbers (÷4):</span>
@@ -427,26 +499,74 @@ const QuestionBanks = {
           ${stepFrac('9x²y³','3xy²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Split parts:</span>
-          ${stepFrac('9','3')} ${opHTML('×')} ${stepFrac('x²','x')} ${opHTML('×')} ${stepFrac('y³','y²')}
+          <span class="exp-label">Split all parts:</span>
+          ${stepFrac('9','3')} ${opHTML('×')} ${stepFrac('x²','x')}
+          ${opHTML('×')} ${stepFrac('y³','y²')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Numbers (÷3):</span>
           ${stepFrac('9','3')} ${arrowHTML()} <span class="exp-note">3</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">x-terms (2−1=1):</span>
-          ${stepFrac('x²','x')} ${arrowHTML()} <span class="exp-note">x</span>
+          <span class="exp-label">x-terms:</span>
+          ${stepFrac('x²','x')} ${arrowHTML()}
+          <span class="exp-note">x &nbsp;(2−1=1)</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">y-terms (3−2=1):</span>
-          ${stepFrac('y³','y²')} ${arrowHTML()} <span class="exp-note">y</span>
+          <span class="exp-label">y-terms:</span>
+          ${stepFrac('y³','y²')} ${arrowHTML()}
+          <span class="exp-note">y &nbsp;(3−2=1)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
           <span class="exp-note">3 × x × y = <strong>3xy</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 3xy</div>
+      `,
+    },
+    {
+      type: 'simplify',
+      label: 'Simplify:',
+      display: fracHTML('12a²b', '4ab²'),
+      answerText: '3a/b',
+      correctIndex: 1,
+      points: 15,
+      options: [
+        { label: '3ab',  html: '<span class="ans-plain">3ab</span>' },
+        { label: '3a/b', html: fracHTML('3a','b') },
+        { label: '4a/b', html: fracHTML('4a','b') },
+        { label: '3b/a', html: fracHTML('3b','a') },
+      ],
+      explanationHTML: `
+        <div class="exp-title">📝 Step-by-step solution</div>
+        <div class="exp-row">
+          <span class="exp-label">Given:</span>
+          ${stepFrac('12a²b','4ab²')}
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Split all parts:</span>
+          ${stepFrac('12','4')} ${opHTML('×')} ${stepFrac('a²','a')}
+          ${opHTML('×')} ${stepFrac('b','b²')}
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Numbers (÷4):</span>
+          ${stepFrac('12','4')} ${arrowHTML()} <span class="exp-note">3</span>
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">a-terms:</span>
+          ${stepFrac('a²','a')} ${arrowHTML()}
+          <span class="exp-note">a &nbsp;(2−1=1)</span>
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">b-terms:</span>
+          ${stepFrac('b','b²')} ${arrowHTML()} ${stepFrac('1','b')}
+          <span class="exp-note">&nbsp;(1−2=−1)</span>
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Combine:</span>
+          3 × a × ${stepFrac('1','b')} ${arrowHTML()} ${stepFrac('3a','b')}
+        </div>
+        <div class="exp-answer">✅ Answer: ${stepFrac('3a','b')}</div>
       `,
     },
   ],
@@ -475,15 +595,15 @@ const QuestionBanks = {
           ${stepFrac('3x','4')} ${opHTML('×')} ${stepFrac('8','x²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply tops &amp; bottoms:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('3x × 8','4 × x²')} ${arrowHTML()} ${stepFrac('24x','4x²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify numbers:</span>
+          <span class="exp-label">Numbers (÷4):</span>
           ${stepFrac('24','4')} ${arrowHTML()} <span class="exp-note">6</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify x-terms:</span>
+          <span class="exp-label">x-terms:</span>
           ${stepFrac('x','x²')} ${arrowHTML()} ${stepFrac('1','x')}
         </div>
         <div class="exp-row">
@@ -501,10 +621,10 @@ const QuestionBanks = {
       correctIndex: 0,
       points: 20,
       options: [
-        { label: '3/2a',   html: fracHTML('3','2a') },
-        { label: '6/5a',   html: fracHTML('6','5a') },
-        { label: '15/4a',  html: fracHTML('15','4a') },
-        { label: '30a/20', html: fracHTML('30a','20') },
+        { label: '3/2a',  html: fracHTML('3','2a') },
+        { label: '6/5a',  html: fracHTML('6','5a') },
+        { label: '15/4a', html: fracHTML('15','4a') },
+        { label: '30a/20',html: fracHTML('30a','20') },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
@@ -513,15 +633,15 @@ const QuestionBanks = {
           ${stepFrac('2a','5')} ${opHTML('×')} ${stepFrac('15','4a²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply tops &amp; bottoms:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('2a × 15','5 × 4a²')} ${arrowHTML()} ${stepFrac('30a','20a²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify numbers:</span>
+          <span class="exp-label">Numbers (÷10):</span>
           ${stepFrac('30','20')} ${arrowHTML()} ${stepFrac('3','2')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify a-terms:</span>
+          <span class="exp-label">a-terms:</span>
           ${stepFrac('a','a²')} ${arrowHTML()} ${stepFrac('1','a')}
         </div>
         <div class="exp-row">
@@ -551,15 +671,15 @@ const QuestionBanks = {
           ${stepFrac('x²','3')} ${opHTML('×')} ${stepFrac('6','x')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply tops &amp; bottoms:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('x² × 6','3 × x')} ${arrowHTML()} ${stepFrac('6x²','3x')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify numbers:</span>
+          <span class="exp-label">Numbers (÷3):</span>
           ${stepFrac('6','3')} ${arrowHTML()} <span class="exp-note">2</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify x-terms:</span>
+          <span class="exp-label">x-terms:</span>
           ${stepFrac('x²','x')} ${arrowHTML()} <span class="exp-note">x</span>
         </div>
         <div class="exp-row">
@@ -577,10 +697,10 @@ const QuestionBanks = {
       correctIndex: 0,
       points: 20,
       options: [
-        { label: 'pq',   html: '<span class="ans-plain">pq</span>' },
-        { label: '2pq',  html: '<span class="ans-plain">2pq</span>' },
-        { label: 'p²q',  html: '<span class="ans-plain">p²q</span>' },
-        { label: '6p²q', html: '<span class="ans-plain">6p²q</span>' },
+        { label: 'pq',  html: '<span class="ans-plain">pq</span>' },
+        { label: '2pq', html: '<span class="ans-plain">2pq</span>' },
+        { label: 'p²q', html: '<span class="ans-plain">p²q</span>' },
+        { label: '6p²q',html: '<span class="ans-plain">6p²q</span>' },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
@@ -589,11 +709,11 @@ const QuestionBanks = {
           ${stepFrac('4p²','6q')} ${opHTML('×')} ${stepFrac('3q²','2p')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply tops &amp; bottoms:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('4p² × 3q²','6q × 2p')} ${arrowHTML()} ${stepFrac('12p²q²','12pq')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷12):</span>
           ${stepFrac('12','12')} ${arrowHTML()} <span class="exp-note">1</span>
         </div>
         <div class="exp-row">
@@ -631,15 +751,15 @@ const QuestionBanks = {
           ${stepFrac('5','x')} ${opHTML('×')} ${stepFrac('x²','10')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply tops &amp; bottoms:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('5 × x²','x × 10')} ${arrowHTML()} ${stepFrac('5x²','10x')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify numbers:</span>
+          <span class="exp-label">Numbers (÷5):</span>
           ${stepFrac('5','10')} ${arrowHTML()} ${stepFrac('1','2')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify x-terms:</span>
+          <span class="exp-label">x-terms:</span>
           ${stepFrac('x²','x')} ${arrowHTML()} <span class="exp-note">x</span>
         </div>
         <div class="exp-row">
@@ -669,11 +789,11 @@ const QuestionBanks = {
           ${stepFrac('3a²','4b')} ${opHTML('×')} ${stepFrac('8b²','9a')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Multiply:</span>
+          <span class="exp-label">Multiply tops & bottoms:</span>
           ${stepFrac('3a² × 8b²','4b × 9a')} ${arrowHTML()} ${stepFrac('24a²b²','36ab')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷12):</span>
           ${stepFrac('24','36')} ${arrowHTML()} ${stepFrac('2','3')}
         </div>
         <div class="exp-row">
@@ -716,7 +836,9 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('4x²','3')} ${opHTML('÷')} ${stepFrac('2x','9')}
         </div>
-        <div class="exp-note-box">KCF: <strong>K</strong>eep · <strong>C</strong>hange ÷ to × · <strong>F</strong>lip 2nd fraction</div>
+        <div class="exp-note-box">
+          🔑 KCF: <strong>K</strong>eep · <strong>C</strong>hange ÷ to × · <strong>F</strong>lip 2nd fraction
+        </div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('4x²','3')} ${opHTML('×')} ${stepFrac('9','2x')}
@@ -726,7 +848,7 @@ const QuestionBanks = {
           ${stepFrac('4x² × 9','3 × 2x')} ${arrowHTML()} ${stepFrac('36x²','6x')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷6):</span>
           ${stepFrac('36','6')} ${arrowHTML()} <span class="exp-note">6</span>
         </div>
         <div class="exp-row">
@@ -759,7 +881,9 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('6a','5')} ${opHTML('÷')} ${stepFrac('3','10a')}
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">
+          🔑 KCF: Keep · Change · Flip
+        </div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('6a','5')} ${opHTML('×')} ${stepFrac('10a','3')}
@@ -769,11 +893,11 @@ const QuestionBanks = {
           ${stepFrac('6a × 10a','5 × 3')} ${arrowHTML()} ${stepFrac('60a²','15')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Simplify:</span>
+          <span class="exp-label">Numbers (÷15):</span>
           ${stepFrac('60','15')} ${arrowHTML()} <span class="exp-note">4</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">Final:</span>
+          <span class="exp-label">Combine:</span>
           <span class="exp-note">4 × a² = <strong>4a²</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 4a²</div>
@@ -798,22 +922,23 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('8m³','4')} ${opHTML('÷')} ${stepFrac('2m','1')}
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">🔑 KCF: Keep · Change · Flip</div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('8m³','4')} ${opHTML('×')} ${stepFrac('1','2m')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Multiply:</span>
-          ${stepFrac('8m³ × 1','4 × 2m')} ${arrowHTML()} ${stepFrac('8m³','8m')}
+          ${stepFrac('8m³','4 × 2m')} ${arrowHTML()} ${stepFrac('8m³','8m')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷8):</span>
           ${stepFrac('8','8')} ${arrowHTML()} <span class="exp-note">1</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">m-terms (3−1=2):</span>
-          ${stepFrac('m³','m')} ${arrowHTML()} <span class="exp-note">m²</span>
+          <span class="exp-label">m-terms:</span>
+          ${stepFrac('m³','m')} ${arrowHTML()}
+          <span class="exp-note">m² &nbsp;(3−1=2)</span>
         </div>
         <div class="exp-answer">✅ Answer: m²</div>
       `,
@@ -837,7 +962,7 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('x²y','2')} ${opHTML('÷')} ${stepFrac('xy','4')}
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">🔑 KCF: Keep · Change · Flip</div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('x²y','2')} ${opHTML('×')} ${stepFrac('4','xy')}
@@ -847,7 +972,7 @@ const QuestionBanks = {
           ${stepFrac('x²y × 4','2 × xy')} ${arrowHTML()} ${stepFrac('4x²y','2xy')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷2):</span>
           ${stepFrac('4','2')} ${arrowHTML()} <span class="exp-note">2</span>
         </div>
         <div class="exp-row">
@@ -856,7 +981,8 @@ const QuestionBanks = {
         </div>
         <div class="exp-row">
           <span class="exp-label">y-terms:</span>
-          ${stepFrac('y','y')} ${arrowHTML()} <span class="exp-note">1 (cancels)</span>
+          ${stepFrac('y','y')} ${arrowHTML()}
+          <span class="exp-note">1 (cancels)</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Combine:</span>
@@ -884,7 +1010,7 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('15p','4')} ${opHTML('÷')} ${stepFrac('5p²','2')}
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">🔑 KCF: Keep · Change · Flip</div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('15p','4')} ${opHTML('×')} ${stepFrac('2','5p²')}
@@ -894,7 +1020,7 @@ const QuestionBanks = {
           ${stepFrac('15p × 2','4 × 5p²')} ${arrowHTML()} ${stepFrac('30p','20p²')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷10):</span>
           ${stepFrac('30','20')} ${arrowHTML()} ${stepFrac('3','2')}
         </div>
         <div class="exp-row">
@@ -927,7 +1053,7 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('12x²','5y')} ${opHTML('÷')} ${stepFrac('4x','15y²')}
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">🔑 KCF: Keep · Change · Flip</div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
           ${stepFrac('12x²','5y')} ${opHTML('×')} ${stepFrac('15y²','4x')}
@@ -937,7 +1063,7 @@ const QuestionBanks = {
           ${stepFrac('12x² × 15y²','5y × 4x')} ${arrowHTML()} ${stepFrac('180x²y²','20xy')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Numbers:</span>
+          <span class="exp-label">Numbers (÷20):</span>
           ${stepFrac('180','20')} ${arrowHTML()} <span class="exp-note">9</span>
         </div>
         <div class="exp-row">
@@ -969,10 +1095,10 @@ const QuestionBanks = {
       correctIndex: 0,
       points: 30,
       options: [
-        { label: 'x − 2',  html: '<span class="ans-plain">x − 2</span>' },
-        { label: 'x + 2',  html: '<span class="ans-plain">x + 2</span>' },
-        { label: 'x − 4',  html: '<span class="ans-plain">x − 4</span>' },
-        { label: 'x² − 2', html: '<span class="ans-plain">x² − 2</span>' },
+        { label: 'x − 2', html: '<span class="ans-plain">x − 2</span>' },
+        { label: 'x + 2', html: '<span class="ans-plain">x + 2</span>' },
+        { label: 'x − 4', html: '<span class="ans-plain">x − 4</span>' },
+        { label: 'x² − 2',html: '<span class="ans-plain">x² − 2</span>' },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
@@ -980,18 +1106,18 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('x² − 4','x + 2')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise numerator:</span>
-          <span class="exp-note">x² − 4 = <strong>(x + 2)(x − 2)</strong></span>
+        <div class="exp-note-box">
+          💡 Difference of 2 squares: a² − b² = (a+b)(a−b)<br>
+          So x² − 4 = <strong>(x+2)(x−2)</strong>
         </div>
-        <div class="exp-note-box">Difference of two squares: a² − b² = (a+b)(a−b)</div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
-          ${stepFrac('(x + 2)(x − 2)','x + 2')}
+          ${stepFrac('(x+2)(x−2)','x+2')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Cancel (x + 2):</span>
-          <span class="exp-note">(x − 2)</span>
+          <span class="exp-label">Cancel (x+2):</span>
+          <span class="exp-note"><s style="color:var(--danger)">(x+2)</s> leaves
+          <strong>(x−2)</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: x − 2</div>
       `,
@@ -1015,9 +1141,9 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('x² + 3x','x')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise numerator:</span>
-          <span class="exp-note">x² + 3x = <strong>x(x + 3)</strong></span>
+        <div class="exp-note-box">
+          💡 Factor out x from numerator:<br>
+          x² + 3x = <strong>x(x + 3)</strong>
         </div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
@@ -1025,7 +1151,10 @@ const QuestionBanks = {
         </div>
         <div class="exp-row">
           <span class="exp-label">Cancel x:</span>
-          <span class="exp-note">x + 3</span>
+          <span class="exp-note">
+            <s style="color:var(--danger)">x</s>(x+3) ÷ <s style="color:var(--danger)">x</s>
+            = <strong>x + 3</strong>
+          </span>
         </div>
         <div class="exp-answer">✅ Answer: x + 3</div>
       `,
@@ -1038,10 +1167,10 @@ const QuestionBanks = {
       correctIndex: 0,
       points: 30,
       options: [
-        { label: '(x+3)/2',  html: fracHTML('x + 3','2') },
-        { label: '(2x+6)/4', html: fracHTML('2x + 6','4') },
-        { label: 'x + 3',    html: '<span class="ans-plain">x + 3</span>' },
-        { label: '(x+3)/4',  html: fracHTML('x + 3','4') },
+        { label: '(x+3)/2', html: fracHTML('x+3','2') },
+        { label: '(2x+6)/4',html: fracHTML('2x+6','4') },
+        { label: 'x + 3',   html: '<span class="ans-plain">x + 3</span>' },
+        { label: '(x+3)/4', html: fracHTML('x+3','4') },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
@@ -1049,20 +1178,24 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('2x² + 6x','4x')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise numerator:</span>
-          <span class="exp-note">2x² + 6x = <strong>2x(x + 3)</strong></span>
+        <div class="exp-note-box">
+          💡 Factor numerator: 2x² + 6x = <strong>2x(x+3)</strong>
         </div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
-          ${stepFrac('2x(x + 3)','4x')}
+          ${stepFrac('2x(x+3)','4x')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Cancel 2x:</span>
-          ${stepFrac('x + 3','2')}
+          <span class="exp-note">
+            <s style="color:var(--danger)">2x</s>(x+3) ÷ (4<s style="color:var(--danger)">x→</s>2)
+          </span>
         </div>
-        <div class="exp-note-box">2x ÷ 2x = 1 (top) &nbsp;|&nbsp; 4x ÷ 2x = 2 (bottom)</div>
-        <div class="exp-answer">✅ Answer: ${stepFrac('x + 3','2')}</div>
+        <div class="exp-row">
+          <span class="exp-label">Result:</span>
+          ${stepFrac('x+3','2')}
+        </div>
+        <div class="exp-answer">✅ Answer: ${stepFrac('x+3','2')}</div>
       `,
     },
     {
@@ -1084,18 +1217,19 @@ const QuestionBanks = {
           <span class="exp-label">Given:</span>
           ${stepFrac('x² − 9','x − 3')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise numerator:</span>
-          <span class="exp-note">x² − 9 = <strong>(x + 3)(x − 3)</strong></span>
+        <div class="exp-note-box">
+          💡 Difference of 2 squares: x² − 9 = <strong>(x+3)(x−3)</strong>
         </div>
-        <div class="exp-note-box">Difference of two squares: a² − b² = (a+b)(a−b)</div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
-          ${stepFrac('(x + 3)(x − 3)','x − 3')}
+          ${stepFrac('(x+3)(x−3)','x−3')}
         </div>
         <div class="exp-row">
-          <span class="exp-label">Cancel (x − 3):</span>
-          <span class="exp-note">x + 3</span>
+          <span class="exp-label">Cancel (x−3):</span>
+          <span class="exp-note">
+            (x+3)<s style="color:var(--danger)">(x−3)</s> ÷
+            <s style="color:var(--danger)">(x−3)</s> = <strong>x + 3</strong>
+          </span>
         </div>
         <div class="exp-answer">✅ Answer: x + 3</div>
       `,
@@ -1103,7 +1237,7 @@ const QuestionBanks = {
     {
       type: 'multiply',
       label: 'Multiply and simplify:',
-      display: `${fracHTML('3x','x² + x')} ${opHTML('×')} ${fracHTML('x + 1','6')}`,
+      display: `${fracHTML('3x','x² + x')} ${opHTML('×')} ${fracHTML('x+1','6')}`,
       answerText: '1/2',
       correctIndex: 0,
       points: 30,
@@ -1117,19 +1251,18 @@ const QuestionBanks = {
         <div class="exp-title">📝 Step-by-step solution</div>
         <div class="exp-row">
           <span class="exp-label">Given:</span>
-          ${stepFrac('3x','x² + x')} ${opHTML('×')} ${stepFrac('x + 1','6')}
+          ${stepFrac('3x','x²+x')} ${opHTML('×')} ${stepFrac('x+1','6')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise x² + x:</span>
-          <span class="exp-note">x² + x = <strong>x(x + 1)</strong></span>
+        <div class="exp-note-box">
+          💡 Factor denominator: x²+x = <strong>x(x+1)</strong>
         </div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
-          ${stepFrac('3x','x(x + 1)')} ${opHTML('×')} ${stepFrac('x + 1','6')}
+          ${stepFrac('3x','x(x+1)')} ${opHTML('×')} ${stepFrac('x+1','6')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Multiply:</span>
-          ${stepFrac('3x(x + 1)','6x(x + 1)')}
+          ${stepFrac('3x(x+1)','6x(x+1)')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Cancel x and (x+1):</span>
@@ -1140,8 +1273,8 @@ const QuestionBanks = {
     },
     {
       type: 'divide',
-      label: 'Divide and simplify:',
-      display: `${fracHTML('4x² + 8x','3')} ${opHTML('÷')} ${fracHTML('x + 2','6')}`,
+      label: 'Factorise then divide:',
+      display: `${fracHTML('4x²+8x','3')} ${opHTML('÷')} ${fracHTML('x+2','6')}`,
       answerText: '8x',
       correctIndex: 1,
       points: 30,
@@ -1155,24 +1288,23 @@ const QuestionBanks = {
         <div class="exp-title">📝 Step-by-step solution</div>
         <div class="exp-row">
           <span class="exp-label">Given:</span>
-          ${stepFrac('4x² + 8x','3')} ${opHTML('÷')} ${stepFrac('x + 2','6')}
+          ${stepFrac('4x²+8x','3')} ${opHTML('÷')} ${stepFrac('x+2','6')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise 4x²+8x:</span>
-          <span class="exp-note">4x² + 8x = <strong>4x(x + 2)</strong></span>
+        <div class="exp-note-box">
+          💡 Factor numerator: 4x²+8x = <strong>4x(x+2)</strong>
         </div>
-        <div class="exp-note-box">KCF: Keep · Change · Flip</div>
+        <div class="exp-note-box">🔑 KCF: Keep · Change · Flip</div>
         <div class="exp-row">
           <span class="exp-label">After KCF:</span>
-          ${stepFrac('4x(x + 2)','3')} ${opHTML('×')} ${stepFrac('6','x + 2')}
-        </div>
-        <div class="exp-row">
-          <span class="exp-label">Multiply:</span>
-          ${stepFrac('4x(x+2) × 6','3(x+2)')} ${arrowHTML()} ${stepFrac('24x(x+2)','3(x+2)')}
+          ${stepFrac('4x(x+2)','3')} ${opHTML('×')} ${stepFrac('6','x+2')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Cancel (x+2):</span>
-          ${stepFrac('24x','3')} ${arrowHTML()} <span class="exp-note">8x</span>
+          ${stepFrac('4x × 6','3')} ${arrowHTML()} ${stepFrac('24x','3')}
+        </div>
+        <div class="exp-row">
+          <span class="exp-label">Simplify:</span>
+          ${stepFrac('24x','3')} ${arrowHTML()} <span class="exp-note"><strong>8x</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 8x</div>
       `,
@@ -1197,61 +1329,67 @@ const QuestionBanks = {
         { label: 'x/y',  html: fracHTML('x','y') },
       ],
       explanationHTML: `
-        <div class="exp-title">📝 Step-by-step solution (Left → Right)</div>
+        <div class="exp-title">📝 Step-by-step solution (Left to Right)</div>
         <div class="exp-row">
-          <span class="exp-label">Step 1 — ÷ pair:</span>
-          ${stepFrac('4x²','6y')} ${opHTML('÷')} ${stepFrac('2x','3y²')}
+          <span class="exp-label">Step 1 — ÷ first pair:</span>
         </div>
         <div class="exp-row exp-indent">
-          KCF: ${stepFrac('4x²','6y')} ${opHTML('×')} ${stepFrac('3y²','2x')}
+          ${stepFrac('4x²','6y')} ${opHTML('÷')} ${stepFrac('2x','3y²')}
+          ${arrowHTML()} ${stepFrac('4x²','6y')} ${opHTML('×')} ${stepFrac('3y²','2x')}
           ${arrowHTML()} ${stepFrac('12x²y²','12xy')} ${arrowHTML()} <span class="exp-note">xy</span>
         </div>
         <div class="exp-row">
-          <span class="exp-label">Step 2 — × last:</span>
+          <span class="exp-label">Step 2 — × next:</span>
+        </div>
+        <div class="exp-row exp-indent">
           xy ${opHTML('×')} ${stepFrac('y','x²')}
-          ${arrowHTML()} ${stepFrac('xy²','x²')} ${arrowHTML()} ${stepFrac('y²','x')}
+          ${arrowHTML()} ${stepFrac('xy²','x²')}
+          ${arrowHTML()} ${stepFrac('y²','x')}
         </div>
         <div class="exp-answer">✅ Answer: ${stepFrac('y²','x')}</div>
       `,
     },
     {
       type: 'mixed',
-      label: 'Simplify:',
-      display: `${fracHTML('x² + 5x + 6','x + 3')} ${opHTML('÷')} <span class="ans-plain">(x + 2)</span>`,
+      label: 'Simplify fully:',
+      display: `${fracHTML('x²+5x+6','x+3')} ${opHTML('÷')} <span style="font-size:0.9em">(x+2)</span>`,
       answerText: '1',
       correctIndex: 0,
       points: 40,
       options: [
-        { label: '1',          html: '<span class="ans-plain">1</span>' },
-        { label: 'x + 2',      html: '<span class="ans-plain">x + 2</span>' },
-        { label: 'x + 3',      html: '<span class="ans-plain">x + 3</span>' },
-        { label: '(x+2)(x+3)', html: '<span class="ans-plain">(x+2)(x+3)</span>' },
+        { label: '1',         html: '<span class="ans-plain">1</span>' },
+        { label: 'x + 2',     html: '<span class="ans-plain">x + 2</span>' },
+        { label: 'x + 3',     html: '<span class="ans-plain">x + 3</span>' },
+        { label: '(x+2)(x+3)',html: '<span class="ans-plain">(x+2)(x+3)</span>' },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
         <div class="exp-row">
           <span class="exp-label">Given:</span>
-          ${stepFrac('x² + 5x + 6','x + 3')} ${opHTML('÷')} (x + 2)
+          ${stepFrac('x²+5x+6','x+3')} ${opHTML('÷')} (x+2)
+        </div>
+        <div class="exp-note-box">
+          💡 Factor: x²+5x+6 = <strong>(x+2)(x+3)</strong><br>
+          (Find two numbers: ×=6, +=5 → 2 and 3 ✓)
         </div>
         <div class="exp-row">
-          <span class="exp-label">Factorise:</span>
-          <span class="exp-note">x²+5x+6 = <strong>(x+2)(x+3)</strong></span>
+          <span class="exp-label">Rewrite:</span>
+          ${stepFrac('(x+2)(x+3)','x+3')} ${opHTML('÷')} (x+2)
         </div>
-        <div class="exp-note-box">Find two numbers: multiply to 6, add to 5 → 2 and 3 ✓</div>
         <div class="exp-row">
           <span class="exp-label">Cancel (x+3):</span>
-          ${stepFrac('(x+2)(x+3)','x+3')} ${arrowHTML()} (x+2)
+          (x+2) ${opHTML('÷')} (x+2)
         </div>
         <div class="exp-row">
-          <span class="exp-label">÷ (x+2):</span>
-          (x+2) ÷ (x+2) ${arrowHTML()} <span class="exp-note"><strong>1</strong></span>
+          <span class="exp-label">Cancel (x+2):</span>
+          <span class="exp-note"><strong>1</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 1</div>
       `,
     },
     {
       type: 'mixed',
-      label: 'Evaluate:',
+      label: 'Evaluate (left to right):',
       display: `${fracHTML('a²b','3')} ${opHTML('÷')} ${fracHTML('a','6b')} ${opHTML('÷')} ${fracHTML('2b','a')}`,
       answerText: 'a²b',
       correctIndex: 0,
@@ -1263,22 +1401,24 @@ const QuestionBanks = {
         { label: '3ab',  html: '<span class="ans-plain">3ab</span>' },
       ],
       explanationHTML: `
-        <div class="exp-title">📝 Step-by-step solution (Left → Right)</div>
+        <div class="exp-title">📝 Step-by-step solution (Left to Right)</div>
         <div class="exp-row">
           <span class="exp-label">Step 1:</span>
           ${stepFrac('a²b','3')} ${opHTML('÷')} ${stepFrac('a','6b')}
         </div>
         <div class="exp-row exp-indent">
-          KCF: ${stepFrac('a²b','3')} ${opHTML('×')} ${stepFrac('6b','a')}
-          ${arrowHTML()} ${stepFrac('6a²b²','3a')} ${arrowHTML()} <span class="exp-note">2ab²</span>
+          ${arrowHTML()} ${stepFrac('a²b','3')} ${opHTML('×')} ${stepFrac('6b','a')}
+          ${arrowHTML()} ${stepFrac('6a²b²','3a')} ${arrowHTML()}
+          <span class="exp-note">2ab²</span>
         </div>
         <div class="exp-row">
           <span class="exp-label">Step 2:</span>
           2ab² ${opHTML('÷')} ${stepFrac('2b','a')}
         </div>
         <div class="exp-row exp-indent">
-          KCF: 2ab² ${opHTML('×')} ${stepFrac('a','2b')}
-          ${arrowHTML()} ${stepFrac('2a²b²','2b')} ${arrowHTML()} <span class="exp-note">a²b</span>
+          ${arrowHTML()} 2ab² ${opHTML('×')} ${stepFrac('a','2b')}
+          ${arrowHTML()} ${stepFrac('2a²b²','2b')} ${arrowHTML()}
+          <span class="exp-note"><strong>a²b</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: a²b</div>
       `,
@@ -1297,54 +1437,57 @@ const QuestionBanks = {
         { label: '3/2',   html: fracHTML('3','2') },
       ],
       explanationHTML: `
-        <div class="exp-title">📝 Step-by-step solution (Left → Right)</div>
+        <div class="exp-title">📝 Step-by-step solution (Left to Right)</div>
         <div class="exp-row">
           <span class="exp-label">Step 1 — × first:</span>
+        </div>
+        <div class="exp-row exp-indent">
           ${stepFrac('2x','y')} ${opHTML('×')} ${stepFrac('3y²','4x²')}
           ${arrowHTML()} ${stepFrac('6xy²','4x²y')} ${arrowHTML()} ${stepFrac('3y','2x')}
         </div>
         <div class="exp-row">
           <span class="exp-label">Step 2 — ÷ last:</span>
-          ${stepFrac('3y','2x')} ${opHTML('÷')} ${stepFrac('3y','2x')}
         </div>
         <div class="exp-row exp-indent">
-          KCF: ${stepFrac('3y','2x')} ${opHTML('×')} ${stepFrac('2x','3y')}
-          ${arrowHTML()} ${stepFrac('6xy','6xy')} ${arrowHTML()} <span class="exp-note"><strong>1</strong></span>
+          ${stepFrac('3y','2x')} ${opHTML('÷')} ${stepFrac('3y','2x')}
+          ${arrowHTML()} ${stepFrac('3y','2x')} ${opHTML('×')} ${stepFrac('2x','3y')}
+          ${arrowHTML()} ${stepFrac('6xy','6xy')} ${arrowHTML()}
+          <span class="exp-note"><strong>1</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 1</div>
       `,
     },
     {
       type: 'mixed',
-      label: 'Simplify:',
-      display: `${fracHTML('x² − x − 6','x + 2')} ${opHTML('×')} ${fracHTML('x + 2','x − 3')}`,
+      label: 'Simplify fully:',
+      display: `${fracHTML('x²−x−6','x+2')} ${opHTML('×')} ${fracHTML('x+2','x−3')}`,
       answerText: '1',
       correctIndex: 2,
       points: 40,
       options: [
-        { label: 'x − 3',      html: '<span class="ans-plain">x − 3</span>' },
-        { label: '(x+2)(x−3)', html: '<span class="ans-plain">(x+2)(x−3)</span>' },
-        { label: '1',          html: '<span class="ans-plain">1</span>' },
-        { label: 'x + 2',      html: '<span class="ans-plain">x + 2</span>' },
+        { label: 'x − 3',       html: '<span class="ans-plain">x − 3</span>' },
+        { label: '(x+2)/(x−3)', html: fracHTML('x+2','x−3') },
+        { label: '1',            html: '<span class="ans-plain">1</span>' },
+        { label: 'x + 2',        html: '<span class="ans-plain">x + 2</span>' },
       ],
       explanationHTML: `
         <div class="exp-title">📝 Step-by-step solution</div>
         <div class="exp-row">
           <span class="exp-label">Given:</span>
-          ${stepFrac('x² − x − 6','x + 2')} ${opHTML('×')} ${stepFrac('x + 2','x − 3')}
+          ${stepFrac('x²−x−6','x+2')} ${opHTML('×')} ${stepFrac('x+2','x−3')}
         </div>
-        <div class="exp-row">
-          <span class="exp-label">Factorise:</span>
-          <span class="exp-note">x²−x−6 = <strong>(x−3)(x+2)</strong></span>
+        <div class="exp-note-box">
+          💡 Factor x²−x−6:<br>
+          Find two numbers: × = −6, + = −1 → −3 and 2 ✓<br>
+          So x²−x−6 = <strong>(x−3)(x+2)</strong>
         </div>
-        <div class="exp-note-box">Numbers: multiply to −6, add to −1 → −3 and +2 ✓</div>
         <div class="exp-row">
           <span class="exp-label">Rewrite:</span>
           ${stepFrac('(x−3)(x+2)','x+2')} ${opHTML('×')} ${stepFrac('x+2','x−3')}
         </div>
         <div class="exp-row">
           <span class="exp-label">All factors cancel:</span>
-          ${stepFrac('(x−3)(x+2) × (x+2)','(x+2) × (x−3)')}
+          ${stepFrac('<s>(x−3)(x+2)</s>','<s>(x+2)(x−3)</s>')}
           ${arrowHTML()} <span class="exp-note"><strong>1</strong></span>
         </div>
         <div class="exp-answer">✅ Answer: 1</div>
@@ -1352,3 +1495,20 @@ const QuestionBanks = {
     },
   ],
 };
+
+// ── Flat pool for Speed Run & Duel ──
+function getAllQuestions() {
+  return [
+    ...QuestionBanks.level1,
+    ...QuestionBanks.level2,
+    ...QuestionBanks.level3,
+    ...QuestionBanks.level4,
+  ];
+}
+
+function getQuestionsByDifficulty(difficulty) {
+  if (difficulty === 'easy')   return [...QuestionBanks.level1, ...QuestionBanks.level2];
+  if (difficulty === 'medium') return [...QuestionBanks.level2, ...QuestionBanks.level3, ...QuestionBanks.level4];
+  if (difficulty === 'hard')   return [...QuestionBanks.level4, ...QuestionBanks.level5, ...QuestionBanks.level6];
+  return getAllQuestions();
+}

@@ -8,32 +8,44 @@
 </head>
 <body>
 
-  <!-- ===================== SCREEN: HOME ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: HOME
+  ═══════════════════════════════════════ -->
   <div id="screen-home" class="screen active">
+    <div class="home-bg-stars"></div>
     <div class="title-card">
-      <div class="wizard-emoji-home" id="wizard-home-display">🧙‍♂️</div>
+      <div class="wizard-emoji-home" id="home-wizard">🧙‍♂️</div>
       <h1>FractoQuest</h1>
       <p class="subtitle">Master Algebraic Fractions — Save the Realm!</p>
     </div>
+    <div class="home-coins-row">
+      <div class="coin-display" id="home-coin-display">🪙 0</div>
+      <div class="stars-display">⭐ <span id="total-stars-home">0</span></div>
+    </div>
     <div class="menu-buttons">
-      <button class="btn btn-primary" onclick="showScreen('screen-mode')">▶ Play</button>
-      <button class="btn btn-rewards" onclick="showScreen('screen-rewards'); updateDailyStatus()">
+      <button class="btn btn-primary" onclick="showScreen('screen-mode')">
+        ⚔️ Play
+      </button>
+      <button class="btn btn-rewards" onclick="showScreen('screen-rewards'); updateDailyStatus(); Rewards.updateCoinDisplays();">
         🎁 Rewards Hub
       </button>
-      <button class="btn btn-secondary" onclick="showScreen('screen-tutorial')">📖 How to Play</button>
-      <button class="btn btn-secondary" onclick="showScreen('screen-scores')">🏆 High Scores</button>
-    </div>
-    <div class="home-stats-row">
-      <div class="coin-display home-coins" id="home-coin-display">🪙 0</div>
-      <div class="stars-display">⭐ <span id="total-stars-home">0</span></div>
+      <button class="btn btn-secondary" onclick="showScreen('screen-tutorial')">
+        📖 How to Play
+      </button>
+      <button class="btn btn-secondary" onclick="showScreen('screen-scores')">
+        🏆 High Scores
+      </button>
     </div>
   </div>
 
-  <!-- ===================== SCREEN: MODE SELECT ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: MODE SELECT
+  ═══════════════════════════════════════ -->
   <div id="screen-mode" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
       <h2>Choose Mode</h2>
+      <div class="coin-display" id="mode-coin-display">🪙 0</div>
     </div>
     <div class="mode-grid">
       <div class="mode-card" onclick="startMode('quest')">
@@ -46,7 +58,7 @@
         <div class="mode-icon">🏫</div>
         <h3>Learn</h3>
         <p>Step-by-step guidance</p>
-        <div class="mode-progress">Always available</div>
+        <div class="mode-progress">Free hints always on</div>
       </div>
       <div class="mode-card" onclick="startMode('speedrun')">
         <div class="mode-icon">⏱️</div>
@@ -54,16 +66,222 @@
         <p>60 seconds, max score!</p>
         <div class="mode-progress" id="speed-best">Best: --</div>
       </div>
-      <div class="mode-card" onclick="startMode('duel')">
+      <div class="mode-card duel-mode-card" onclick="showScreen('screen-duel-setup')">
         <div class="mode-icon">🆚</div>
-        <h3>Duel</h3>
-        <p>2 players, same device</p>
-        <div class="mode-progress">Pass &amp; Play</div>
+        <h3>Battle Duel</h3>
+        <p>Fight an opponent!</p>
+        <div class="mode-progress">⚡ PvP or vs CPU</div>
       </div>
     </div>
   </div>
 
-  <!-- ===================== SCREEN: TUTORIAL ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: DUEL SETUP
+  ═══════════════════════════════════════ -->
+  <div id="screen-duel-setup" class="screen">
+    <div class="screen-header">
+      <button class="btn-back" onclick="showScreen('screen-mode')">← Back</button>
+      <h2>⚔️ Battle Duel Setup</h2>
+    </div>
+
+    <!-- Fighter Cards -->
+    <div class="duel-setup-fighters">
+      <!-- Player 1 -->
+      <div class="fighter-setup-card">
+        <div class="fighter-avatar" id="p1-avatar">🧙‍♂️</div>
+        <div class="fighter-setup-label">Player 1</div>
+        <input id="p1-name" class="fighter-name-input" type="text"
+               placeholder="Your name" maxlength="10" value="Wizard" />
+        <div class="avatar-picker" id="p1-avatars">
+          <span onclick="pickAvatar(1,'🧙‍♂️')">🧙‍♂️</span>
+          <span onclick="pickAvatar(1,'🦸')">🦸</span>
+          <span onclick="pickAvatar(1,'🧝')">🧝</span>
+          <span onclick="pickAvatar(1,'🧛')">🧛</span>
+          <span onclick="pickAvatar(1,'🐉')">🐉</span>
+        </div>
+      </div>
+
+      <div class="vs-badge">VS</div>
+
+      <!-- Player 2 / CPU -->
+      <div class="fighter-setup-card">
+        <div class="fighter-avatar" id="p2-avatar">🤖</div>
+        <div class="fighter-setup-label" id="p2-label">Opponent</div>
+        <input id="p2-name" class="fighter-name-input" type="text"
+               placeholder="Opponent name" maxlength="10" value="Rival" />
+        <div class="avatar-picker" id="p2-avatars">
+          <span onclick="pickAvatar(2,'🤖')">🤖</span>
+          <span onclick="pickAvatar(2,'🧟')">🧟</span>
+          <span onclick="pickAvatar(2,'🧜')">🧜</span>
+          <span onclick="pickAvatar(2,'🦹')">🦹</span>
+          <span onclick="pickAvatar(2,'👾')">👾</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Duel Options -->
+    <div class="duel-options-card">
+      <div class="duel-option-row">
+        <span class="duel-opt-label">Mode:</span>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="btn-pvp"
+                  onclick="setDuelMode('pvp')">👥 2 Players</button>
+          <button class="toggle-btn" id="btn-cpu"
+                  onclick="setDuelMode('cpu')">🤖 vs CPU</button>
+        </div>
+      </div>
+      <div class="duel-option-row">
+        <span class="duel-opt-label">Difficulty:</span>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="diff-easy"
+                  onclick="setDifficulty('easy')">😊 Easy</button>
+          <button class="toggle-btn" id="diff-medium"
+                  onclick="setDifficulty('medium')">😤 Medium</button>
+          <button class="toggle-btn" id="diff-hard"
+                  onclick="setDifficulty('hard')">💀 Hard</button>
+        </div>
+      </div>
+      <div class="duel-option-row">
+        <span class="duel-opt-label">Rounds:</span>
+        <div class="toggle-group">
+          <button class="toggle-btn active" id="rounds-3"
+                  onclick="setRounds(3)">3</button>
+          <button class="toggle-btn" id="rounds-5"
+                  onclick="setRounds(5)">5</button>
+          <button class="toggle-btn" id="rounds-7"
+                  onclick="setRounds(7)">7</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-start-duel" onclick="startDuel()">
+      ⚔️ Start Battle!
+    </button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SCREEN: DUEL BATTLE
+  ═══════════════════════════════════════ -->
+  <div id="screen-duel" class="screen">
+
+    <!-- Round Banner (shown between rounds) -->
+    <div id="round-banner" class="round-banner" style="display:none">
+      <div id="round-banner-text" class="round-banner-text"></div>
+    </div>
+
+    <!-- Fighter HUD -->
+    <div class="duel-hud">
+      <!-- P1 -->
+      <div class="duel-fighter-hud" id="p1-hud">
+        <div class="duel-avatar" id="p1-hud-avatar">🧙‍♂️</div>
+        <div class="duel-fighter-info">
+          <div class="duel-fighter-name" id="p1-hud-name">Wizard</div>
+          <div class="duel-hp-bar-wrap">
+            <div class="duel-hp-bar" id="p1-hp-bar" style="width:100%"></div>
+          </div>
+          <div class="duel-hp-text" id="p1-hp-text">❤️ 5</div>
+        </div>
+      </div>
+
+      <!-- Round Counter -->
+      <div class="duel-round-info">
+        <div class="duel-round-num" id="duel-round-display">R1</div>
+        <div class="duel-score-board">
+          <span id="p1-wins-display" class="win-dot-row"></span>
+          <span class="vs-small">vs</span>
+          <span id="p2-wins-display" class="win-dot-row"></span>
+        </div>
+        <div id="duel-turn-badge" class="duel-turn-badge">P1's Turn</div>
+      </div>
+
+      <!-- P2 -->
+      <div class="duel-fighter-hud p2-hud-side" id="p2-hud">
+        <div class="duel-fighter-info" style="align-items:flex-end">
+          <div class="duel-fighter-name" id="p2-hud-name">Rival</div>
+          <div class="duel-hp-bar-wrap">
+            <div class="duel-hp-bar p2-bar" id="p2-hp-bar" style="width:100%"></div>
+          </div>
+          <div class="duel-hp-text" id="p2-hp-text">❤️ 5</div>
+        </div>
+        <div class="duel-avatar" id="p2-hud-avatar">🤖</div>
+      </div>
+    </div>
+
+    <!-- Arena Sprites -->
+    <div class="duel-arena">
+      <div class="arena-fighter left-fighter" id="arena-p1">
+        <div class="arena-sprite" id="arena-p1-sprite">🧙‍♂️</div>
+        <div class="fighter-effect" id="p1-effect"></div>
+      </div>
+      <div class="battle-sparks" id="battle-sparks"></div>
+      <div class="arena-fighter right-fighter" id="arena-p2">
+        <div class="arena-sprite" id="arena-p2-sprite">🤖</div>
+        <div class="fighter-effect" id="p2-effect"></div>
+      </div>
+    </div>
+
+    <!-- Duel Question -->
+    <div class="duel-question-area">
+      <div class="duel-question-label" id="duel-q-label">Simplify:</div>
+      <div class="duel-question-display" id="duel-q-display"></div>
+    </div>
+
+    <!-- Answer Timer Bar (simultaneous pressure) -->
+    <div class="duel-timer-wrap">
+      <div class="duel-timer-bar" id="duel-timer-bar"></div>
+      <div class="duel-timer-text" id="duel-timer-text">15s</div>
+    </div>
+
+    <!-- Whose turn prompt -->
+    <div class="duel-turn-prompt" id="duel-turn-prompt">
+      <span id="duel-turn-name">Wizard</span>'s turn to answer!
+    </div>
+
+    <!-- MCQ Options -->
+    <div class="duel-mcq-grid" id="duel-mcq-grid"></div>
+
+    <!-- Duel Hint -->
+    <div class="duel-actions">
+      <button class="btn btn-hint" id="duel-hint-btn" onclick="duelUseHint()">
+        💡 Hint (−1 ❤️)
+      </button>
+      <button class="btn btn-check" id="duel-check-btn"
+              onclick="submitDuelAnswer()" style="display:none">
+        ⚔️ Attack!
+      </button>
+    </div>
+
+    <!-- CPU Thinking Indicator -->
+    <div id="cpu-thinking" class="cpu-thinking" style="display:none">
+      🤖 Calculating... <span id="cpu-dots">.</span>
+    </div>
+
+    <!-- Quit -->
+    <button class="duel-quit-btn" onclick="confirmQuitDuel()">✕ Forfeit</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SCREEN: DUEL RESULT
+  ═══════════════════════════════════════ -->
+  <div id="screen-duel-result" class="screen">
+    <div class="duel-result-card">
+      <div class="result-trophy" id="result-trophy">🏆</div>
+      <h2 id="result-title">Battle Over!</h2>
+      <div class="result-winner" id="result-winner"></div>
+      <div class="result-stats" id="result-stats"></div>
+      <div class="result-coins" id="result-coins"></div>
+      <div class="result-buttons">
+        <button class="btn btn-secondary"
+                onclick="showScreen('screen-mode')">🗺️ Menu</button>
+        <button class="btn btn-primary"
+                onclick="showScreen('screen-duel-setup')">🔄 Rematch</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       SCREEN: TUTORIAL
+  ═══════════════════════════════════════ -->
   <div id="screen-tutorial" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
@@ -77,9 +295,10 @@
     </div>
   </div>
 
-  <!-- ===================== SCREEN: GAME ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: MAIN GAME
+  ═══════════════════════════════════════ -->
   <div id="screen-game" class="screen">
-
     <!-- HUD -->
     <div class="hud">
       <div class="hud-left">
@@ -97,18 +316,17 @@
       </div>
     </div>
 
-    <!-- Streak display -->
-    <div id="streak-display" class="streak-display" style="display:none"></div>
-
     <!-- Wizard & Spell Area -->
     <div class="spell-area">
       <div class="wizard-container">
         <div class="wizard-sprite" id="wizard-sprite">🧙‍♂️</div>
         <div class="speech-bubble" id="speech-bubble" style="display:none"></div>
       </div>
-      <div class="hud-coins-small coin-display" id="game-coin-display">🪙 0</div>
       <div class="question-number" id="question-number">Q 1 / 5</div>
     </div>
+
+    <!-- Streak display -->
+    <div id="streak-display" class="streak-display" style="display:none"></div>
 
     <!-- Question Card -->
     <div class="question-card" id="question-card">
@@ -117,7 +335,7 @@
       <div class="step-hint" id="step-hint" style="display:none"></div>
     </div>
 
-    <!-- Progress Bar -->
+    <!-- Progress bar -->
     <div class="progress-bar-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
@@ -127,8 +345,11 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-      <button class="btn btn-hint" id="btn-hint" onclick="showHint()">💡 Hint (-5pts)</button>
-      <button class="btn btn-check" id="btn-check" onclick="checkAnswer()" style="display:none">
+      <button class="btn btn-hint" id="btn-hint" onclick="showHint()">
+        💡 Hint (−5pts)
+      </button>
+      <button class="btn btn-check" id="btn-check"
+              onclick="checkAnswer()" style="display:none">
         ✓ Cast Spell!
       </button>
     </div>
@@ -142,71 +363,80 @@
         <button class="btn btn-primary" onclick="nextQuestion()">Next →</button>
       </div>
     </div>
-
   </div>
 
-  <!-- ===================== SCREEN: LEVEL COMPLETE ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: LEVEL COMPLETE
+  ═══════════════════════════════════════ -->
   <div id="screen-level-complete" class="screen">
     <div class="complete-card">
       <div class="complete-emoji" id="complete-emoji">🎉</div>
       <h2 id="complete-title">Level Complete!</h2>
       <div class="star-rating" id="star-rating"></div>
       <div class="complete-stats" id="complete-stats"></div>
+      <div class="complete-coins" id="complete-coins"></div>
       <div class="complete-buttons">
-        <button class="btn btn-secondary" onclick="showScreen('screen-mode')">🗺️ Map</button>
-        <button class="btn btn-primary" id="btn-next-level" onclick="nextLevel()">Next Level ▶</button>
+        <button class="btn btn-secondary"
+                onclick="showScreen('screen-mode')">🗺️ Map</button>
+        <button class="btn btn-primary" id="btn-next-level"
+                onclick="nextLevel()">Next Level ▶</button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== SCREEN: HIGH SCORES ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: HIGH SCORES
+  ═══════════════════════════════════════ -->
   <div id="screen-scores" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
       <h2>🏆 High Scores</h2>
     </div>
     <div id="scores-list" class="scores-list"></div>
-    <button class="btn btn-danger" onclick="clearScores()">🗑️ Clear Scores</button>
+    <button class="btn btn-danger" onclick="clearScores()">
+      🗑️ Clear Scores
+    </button>
   </div>
 
-  <!-- ===================== SCREEN: REWARDS HUB ===================== -->
+  <!-- ═══════════════════════════════════════
+       SCREEN: REWARDS HUB
+  ═══════════════════════════════════════ -->
   <div id="screen-rewards" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
       <h2>🎁 Rewards Hub</h2>
       <div class="coin-display" id="rewards-coin-display">🪙 0</div>
     </div>
-
     <div class="rewards-grid">
-      <div class="reward-hub-card" onclick="SpellShop.render(); showPanel('panel-shop')">
+      <div class="reward-hub-card"
+           onclick="SpellShop.render(); showPanel('panel-shop')">
         <div class="rh-icon">🏪</div>
         <div class="rh-name">Spell Shop</div>
-        <div class="rh-desc">Spend coins on wizard upgrades</div>
+        <div class="rh-desc">Spend coins on upgrades</div>
       </div>
-      <div class="reward-hub-card" onclick="BadgeSystem.renderCabinet(); showPanel('panel-badges')">
+      <div class="reward-hub-card"
+           onclick="BadgeSystem.renderCabinet(); showPanel('panel-badges')">
         <div class="rh-icon">🏅</div>
         <div class="rh-name">Badge Cabinet</div>
-        <div class="rh-desc">View your achievements</div>
+        <div class="rh-desc">Your achievements</div>
       </div>
       <div class="reward-hub-card" onclick="PotionCraft.open()">
         <div class="rh-icon">🧪</div>
         <div class="rh-name">Potion Craft</div>
-        <div class="rh-desc">Solve equations to brew potions</div>
+        <div class="rh-desc">Solve equations, brew potions</div>
       </div>
       <div class="reward-hub-card" onclick="TreasureHunt.open()">
         <div class="rh-icon">🗺️</div>
         <div class="rh-name">Treasure Hunt</div>
-        <div class="rh-desc">Crack algebraic codes to open chests</div>
+        <div class="rh-desc">Crack algebraic codes</div>
       </div>
       <div class="reward-hub-card" onclick="FractionForge.open()">
         <div class="rh-icon">⚒️</div>
         <div class="rh-name">Fraction Forge</div>
-        <div class="rh-desc">Build the correct simplified fraction</div>
+        <div class="rh-desc">Build the correct fraction</div>
       </div>
       <div class="reward-hub-card daily-card"
-           onclick="DailyChallenge.isDoneToday()
-             ? showToast('✅ Daily done! Come back tomorrow!')
-             : startDailyChallenge()">
+           onclick="handleDailyChallenge()">
         <div class="rh-icon">📅</div>
         <div class="rh-name">Daily Challenge</div>
         <div class="rh-desc" id="daily-status">+25 🪙 bonus!</div>
@@ -233,18 +463,11 @@
     </div>
   </div>
 
-  <!-- ===================== BADGE POPUP (always present) ===================== -->
-  <div id="badge-popup" class="badge-popup">
-    <div class="badge-popup-inner">
-      <div id="badge-popup-icon" class="bp-icon"></div>
-      <div class="bp-label">🏅 Badge Unlocked!</div>
-      <div id="badge-popup-name" class="bp-name"></div>
-      <div id="badge-popup-desc" class="bp-desc"></div>
-      <div id="badge-popup-algebra" class="bp-algebra"></div>
-    </div>
-  </div>
+  <!-- ═══════════════════════════════════════
+       OVERLAYS & POPUPS
+  ═══════════════════════════════════════ -->
 
-  <!-- ===================== BADGE DETAIL MODAL ===================== -->
+  <!-- Badge Detail Modal -->
   <div id="badge-detail-modal" class="modal-overlay" style="display:none"
        onclick="if(event.target===this)this.style.display='none'">
     <div class="modal-box">
@@ -260,10 +483,21 @@
     </div>
   </div>
 
-  <!-- ===================== TOAST ===================== -->
+  <!-- Badge Popup (slide-up notification) -->
+  <div id="badge-popup" class="badge-popup">
+    <div class="badge-popup-inner">
+      <div id="badge-popup-icon" class="bp-icon"></div>
+      <div class="bp-label">🏅 Badge Unlocked!</div>
+      <div id="badge-popup-name" class="bp-name"></div>
+      <div id="badge-popup-desc" class="bp-desc"></div>
+      <div id="badge-popup-algebra" class="bp-algebra"></div>
+    </div>
+  </div>
+
+  <!-- Toast -->
   <div id="toast" class="toast"></div>
 
-  <!-- ===================== OVERLAY: POTION CRAFT ===================== -->
+  <!-- Potion Craft Overlay -->
   <div id="screen-potion" class="side-game-overlay" style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
@@ -281,13 +515,15 @@
       <div id="potion-steps" class="potion-steps" style="display:none"></div>
       <div id="potion-result" class="potion-result"></div>
       <div class="sg-actions">
-        <button class="btn btn-secondary" onclick="PotionCraft.nextPuzzle()">Next Puzzle 🔄</button>
-        <button class="btn btn-secondary" onclick="PotionCraft.close()">Close</button>
+        <button class="btn btn-secondary"
+                onclick="PotionCraft.nextPuzzle()">Next 🔄</button>
+        <button class="btn btn-secondary"
+                onclick="PotionCraft.close()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- ===================== OVERLAY: TREASURE HUNT ===================== -->
+  <!-- Treasure Hunt Overlay -->
   <div id="screen-treasure" class="side-game-overlay" style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
@@ -295,16 +531,16 @@
         <button class="btn-close" onclick="TreasureHunt.close()">✕</button>
       </div>
       <div class="coin-display" id="treasure-coin-display">🪙 0</div>
-      <p class="sg-subtitle">Tap a chest — crack the algebraic code to unlock it!</p>
+      <p class="sg-subtitle">Crack the algebraic code to unlock each chest!</p>
       <div id="treasure-map" class="treasure-map"></div>
-      <div id="treasure-puzzle" class="treasure-puzzle" style="display:none"></div>
-      <button class="btn btn-secondary" onclick="TreasureHunt.close()" style="margin-top:12px">
-        Close
-      </button>
+      <div id="treasure-puzzle" class="treasure-puzzle"
+           style="display:none"></div>
+      <button class="btn btn-secondary"
+              onclick="TreasureHunt.close()" style="margin-top:12px">Close</button>
     </div>
   </div>
 
-  <!-- ===================== OVERLAY: FRACTION FORGE ===================== -->
+  <!-- Fraction Forge Overlay -->
   <div id="screen-forge" class="side-game-overlay" style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
@@ -314,10 +550,9 @@
       <div class="coin-display" id="forge-coin-display">🪙 0</div>
       <div id="forge-question" class="forge-q"></div>
       <div id="forge-given" class="forge-given"></div>
-
       <div class="forge-build">
         <div class="forge-slot-area">
-          <div class="forge-slot-label">Pick Numerator</div>
+          <div class="forge-slot-label">Numerator</div>
           <div id="forge-num-pieces" class="forge-pieces"></div>
           <div class="forge-slot-box">
             <div id="forge-num-slot" class="forge-slot">?</div>
@@ -325,29 +560,35 @@
         </div>
         <div class="forge-divider-line"></div>
         <div class="forge-slot-area">
-          <div class="forge-slot-label">Pick Denominator</div>
+          <div class="forge-slot-label">Denominator</div>
           <div id="forge-den-pieces" class="forge-pieces"></div>
           <div class="forge-slot-box">
             <div id="forge-den-slot" class="forge-slot">?</div>
           </div>
         </div>
       </div>
-
       <div id="forge-result" class="forge-result"></div>
       <div id="forge-hint-text" class="forge-hint" style="display:none"></div>
-
       <div class="sg-actions">
-        <button class="btn btn-hint" onclick="FractionForge.showHint()">💡 Hint</button>
-        <button class="btn btn-secondary" onclick="FractionForge.nextPuzzle()">Next 🔄</button>
-        <button class="btn btn-secondary" onclick="FractionForge.close()">Close</button>
+        <button class="btn btn-hint"
+                onclick="FractionForge.showHint()">💡 Hint</button>
+        <button class="btn btn-secondary"
+                onclick="FractionForge.nextPuzzle()">Next 🔄</button>
+        <button class="btn btn-secondary"
+                onclick="FractionForge.close()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- Scripts — order matters -->
+  <!-- Duel Attack Animation Overlay -->
+  <div id="attack-overlay" class="attack-overlay" style="display:none">
+    <div id="attack-animation" class="attack-animation"></div>
+  </div>
+
+  <!-- scripts -->
   <script src="questions.js"></script>
   <script src="game.js"></script>
+  <script src="duel.js"></script>
   <script src="rewards.js"></script>
-
 </body>
 </html>
