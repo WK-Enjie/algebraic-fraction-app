@@ -814,3 +814,503 @@ s {
   text-decoration-color: var(--danger);
   opacity: 0.7;
 }
+
+/* ========================================
+   REWARDS & SIDE GAMES — STYLES
+   ======================================== */
+
+/* ── Coin display ── */
+.coin-display {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid var(--gold);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+}
+
+.home-coins {
+  margin-top: 8px;
+  font-size: 1.1em;
+}
+
+/* floating coin animation */
+.float-coin {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--gold);
+  z-index: 999;
+  animation: float-up 1.2s ease forwards;
+}
+
+@keyframes float-up {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(1.3); }
+}
+
+/* ── Rewards Hub ── */
+.rewards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 16px;
+}
+
+.reward-hub-card {
+  background: var(--card);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 18px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.reward-hub-card:active { transform: scale(0.95); }
+
+.rh-icon  { font-size: 2.2em; margin-bottom: 6px; }
+.rh-name  { font-weight: 700; font-size: 0.95em; margin-bottom: 4px; }
+.rh-desc  { font-size: 0.75em; color: var(--text-dim); }
+
+.daily-card {
+  border-color: var(--gold);
+  background: rgba(255, 215, 0, 0.07);
+}
+
+/* ── Reward Panels ── */
+.reward-panel {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--primary);
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.panel-header h3 { font-size: 1.1em; }
+
+.btn-close {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* ── Shop ── */
+.shop-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.shop-card {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 14px 10px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.shop-card.owned     { border-color: var(--success); }
+.shop-card.too-costly { opacity: 0.6; }
+
+.shop-icon   { font-size: 2em; margin-bottom: 4px; }
+.shop-name   { font-weight: 700; font-size: 0.88em; margin-bottom: 3px; }
+.shop-desc   { font-size: 0.72em; color: var(--text-dim); margin-bottom: 4px; }
+.shop-algebra{ font-size: 0.68em; color: var(--primary-light);
+               font-style: italic; margin-bottom: 6px; }
+.shop-price  { font-size: 0.82em; color: var(--gold); margin-bottom: 8px; }
+
+.btn-shop {
+  font-size: 0.78em;
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 700;
+}
+
+.btn-owned {
+  background: var(--success) !important;
+  cursor: default;
+}
+
+.shop-msg {
+  font-size: 0.85em;
+  min-height: 20px;
+  margin-bottom: 8px;
+  text-align: center;
+  transition: opacity 0.5s;
+}
+
+/* ── Badge Cabinet ── */
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+.badge-card {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.badge-card:active { transform: scale(0.95); }
+.badge-card.earned { border-color: var(--gold); }
+.badge-card.locked { opacity: 0.5; }
+
+.badge-icon { font-size: 1.8em; margin-bottom: 4px; }
+.badge-name { font-size: 0.7em; color: var(--text-dim); }
+
+/* Badge detail modal */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 300; padding: 20px;
+}
+
+.modal-box {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 30px 24px;
+  text-align: center;
+  max-width: 340px;
+  width: 100%;
+  border: 2px solid var(--gold);
+}
+
+.bd-icon    { font-size: 3.5em; margin-bottom: 8px; }
+.bd-name    { font-size: 1.2em; font-weight: 700; margin-bottom: 6px; }
+.bd-desc    { color: var(--text-dim); font-size: 0.88em; margin-bottom: 10px; }
+.bd-algebra {
+  background: var(--card2);
+  border-radius: 8px; padding: 8px 12px;
+  margin-bottom: 10px; font-size: 0.82em;
+}
+.algebra-tag { color: var(--primary-light); font-style: italic; }
+.bd-status  {
+  font-size: 0.85em; margin-bottom: 16px;
+  color: var(--success);
+}
+
+/* ── Badge Popup ── */
+.badge-popup {
+  position: fixed; bottom: -160px; left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 16px; padding: 16px 24px;
+  text-align: center; z-index: 500;
+  width: 280px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  transition: bottom 0.5s cubic-bezier(.34,1.56,.64,1);
+}
+
+.badge-popup.show { bottom: 30px; }
+
+.bp-icon   { font-size: 2.5em; }
+.bp-label  { font-size: 0.75em; color: rgba(255,255,255,0.8);
+             text-transform: uppercase; letter-spacing: 1px; }
+.bp-name   { font-size: 1.1em; font-weight: 700; color: white; }
+.bp-desc   { font-size: 0.78em; color: rgba(255,255,255,0.85); margin-top: 3px; }
+.bp-algebra{ font-size: 0.72em; color: rgba(255,255,255,0.7);
+             font-style: italic; margin-top: 4px; }
+
+/* ── Streak display ── */
+.streak-display {
+  position: fixed; top: 70px; right: 12px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: white; border-radius: 20px;
+  padding: 6px 14px; font-size: 0.9em;
+  font-weight: 700; z-index: 50;
+  box-shadow: 0 2px 12px rgba(239,68,68,0.4);
+  animation: pulse-streak 1s ease infinite;
+}
+
+@keyframes pulse-streak {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed; bottom: 20px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--card2);
+  border: 1px solid var(--primary);
+  color: var(--text); border-radius: 12px;
+  padding: 10px 20px; font-size: 0.9em;
+  z-index: 400; transition: transform 0.4s ease;
+  pointer-events: none; white-space: nowrap;
+  max-width: 90vw; text-align: center;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── Side Game Overlay ── */
+.side-game-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 16px;
+}
+
+.side-game-box {
+  background: var(--card);
+  border-radius: 20px;
+  border: 2px solid var(--primary);
+  padding: 20px 18px;
+  width: 100%; max-width: 440px;
+  max-height: 90vh; overflow-y: auto;
+  display: flex; flex-direction: column;
+  gap: 10px;
+}
+
+.sg-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.sg-header h3 { font-size: 1.15em; }
+.sg-subtitle  { font-size: 0.82em; color: var(--text-dim); }
+
+.sg-actions {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+  margin-top: 4px;
+}
+
+/* ── Potion Craft ── */
+.potion-flask { font-size: 2em; text-align: center; }
+.potion-q     { font-size: 0.85em; color: var(--text-dim); text-align: center; }
+.potion-equation {
+  font-size: 1.5em; font-weight: 700;
+  text-align: center; color: var(--secondary);
+  background: var(--card2); border-radius: 10px; padding: 12px;
+}
+.potion-attempts { font-size: 0.85em; text-align: center; color: var(--text-dim); }
+
+.potion-options {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+
+.potion-opt {
+  background: var(--card2); border: 2px solid var(--card2);
+  border-radius: 10px; padding: 14px 8px;
+  font-size: 1em; font-weight: 700; color: var(--text);
+  cursor: pointer; transition: border-color 0.2s;
+}
+
+.potion-opt:active    { transform: scale(0.96); }
+.potion-correct       { border-color: var(--success) !important;
+                        background: rgba(16,185,129,0.15) !important; }
+.potion-wrong         { border-color: var(--danger) !important;
+                        background: rgba(239,68,68,0.12) !important; }
+
+.potion-steps {
+  background: var(--card2); border-radius: 10px;
+  padding: 12px; font-size: 0.85em;
+}
+
+.step-title  { color: var(--secondary); font-weight: 700; margin-bottom: 6px; }
+.brew-step   { color: var(--text); margin-bottom: 4px; line-height: 1.6; }
+.potion-hint { color: var(--secondary); font-style: italic; }
+
+.brew-success {
+  background: rgba(16,185,129,0.15); border: 1px solid var(--success);
+  border-radius: 10px; padding: 12px;
+  text-align: center; font-weight: 700; color: var(--success);
+}
+
+.brew-fail {
+  background: rgba(239,68,68,0.1); border: 1px solid var(--danger);
+  border-radius: 10px; padding: 10px;
+  text-align: center; color: var(--danger); font-size: 0.88em;
+}
+
+.brew-anim { font-size: 1.5em; margin-top: 6px; animation: pop 0.4s; }
+
+/* ── Treasure Hunt ── */
+.treasure-map {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin: 4px 0;
+}
+
+.chest-card {
+  background: var(--card2); border-radius: 12px;
+  padding: 16px 10px; text-align: center;
+  cursor: pointer; border: 1px solid transparent;
+  transition: transform 0.15s, border-color 0.2s;
+}
+
+.chest-card:active { transform: scale(0.95); }
+.chest-locked  { border-color: var(--text-dim); }
+.chest-open    { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+.chest-icon    { font-size: 2em; margin-bottom: 4px; }
+.chest-name    { font-size: 0.82em; font-weight: 700; margin-bottom: 2px; }
+.chest-reward  { font-size: 0.75em; color: var(--gold); }
+
+.treasure-puzzle {
+  background: var(--card2); border-radius: 12px; padding: 16px;
+  font-size: 0.88em;
+}
+
+.puzzle-header { font-weight: 700; color: var(--secondary); margin-bottom: 8px; }
+.puzzle-clue   { color: var(--text-dim); font-size: 0.82em; margin-bottom: 4px; }
+.puzzle-expression {
+  font-size: 1.3em; text-align: center;
+  background: var(--card); border-radius: 8px;
+  padding: 12px; margin: 8px 0;
+}
+
+.puzzle-opts   {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0;
+}
+
+.treasure-btn {
+  background: var(--card); border: 2px solid var(--primary);
+  border-radius: 10px; padding: 12px;
+  color: var(--text); font-size: 1em; font-weight: 700;
+  cursor: pointer; transition: border-color 0.2s;
+}
+
+.treasure-correct { border-color: var(--success) !important;
+                    background: rgba(16,185,129,0.15) !important; }
+.treasure-wrong   { border-color: var(--danger) !important; }
+
+.treasure-working {
+  background: var(--card); border-radius: 8px; padding: 10px;
+  font-size: 0.82em; margin: 6px 0;
+}
+
+.working-title { color: var(--secondary); font-weight: 700; margin-bottom: 4px; }
+.chest-step    { color: var(--text); margin-bottom: 4px; line-height: 1.7; }
+.chest-already-open { color: var(--success); text-align: center; padding: 12px; }
+
+.treasure-success {
+  background: rgba(16,185,129,0.15); border: 1px solid var(--success);
+  border-radius: 10px; padding: 12px; text-align: center;
+  color: var(--success); font-weight: 700;
+}
+
+.treasure-fail {
+  background: rgba(239,68,68,0.1); border: 1px solid var(--danger);
+  border-radius: 10px; padding: 10px; text-align: center;
+  color: var(--danger); font-size: 0.85em;
+}
+
+/* ── Fraction Forge ── */
+.forge-q     { font-size: 0.9em; color: var(--text-dim); text-align: center; }
+.forge-given {
+  font-size: 1.5em; text-align: center;
+  background: var(--card2); border-radius: 10px; padding: 14px;
+}
+
+.forge-build {
+  background: var(--card2); border-radius: 12px;
+  padding: 14px; display: flex;
+  flex-direction: column; align-items: center; gap: 8px;
+}
+
+.forge-slot-area { width: 100%; }
+.forge-slot-label {
+  font-size: 0.78em; color: var(--secondary);
+  font-weight: 700; margin-bottom: 6px; text-align: center;
+}
+
+.forge-pieces {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; margin-bottom: 8px;
+}
+
+.forge-piece {
+  background: var(--primary); color: white;
+  border-radius: 8px; padding: 10px 14px;
+  font-size: 0.95em; font-weight: 700;
+  cursor: pointer; transition: transform 0.15s, background 0.2s;
+  border: 2px solid transparent;
+}
+
+.forge-piece:active       { transform: scale(0.95); }
+.piece-selected           { border-color: var(--gold) !important;
+                            background: var(--secondary) !important; }
+
+.forge-slot-box { text-align: center; }
+.forge-slot {
+  display: inline-block; min-width: 80px;
+  background: var(--card); border: 2px dashed var(--primary);
+  border-radius: 10px; padding: 12px 20px;
+  font-size: 1.2em; font-weight: 700; color: var(--text-dim);
+  text-align: center;
+}
+
+.forge-divider-line {
+  width: 120px; height: 2px;
+  background: var(--text); margin: 4px 0;
+}
+
+.forge-answer {
+  font-size: 1.4em;
+  display: inline-flex !important;
+}
+
+.forge-result {
+  text-align: center; font-size: 0.9em;
+}
+
+.forge-success {
+  background: rgba(16,185,129,0.15); border: 1px solid var(--success);
+  border-radius: 10px; padding: 14px;
+  color: var(--success); font-weight: 700;
+}
+
+.forge-fail {
+  background: rgba(239,68,68,0.1); border: 1px solid var(--danger);
+  border-radius: 10px; padding: 12px;
+  color: var(--danger);
+}
+
+.forge-hint {
+  background: rgba(245,158,11,0.15); border-left: 3px solid var(--secondary);
+  border-radius: 8px; padding: 10px 12px;
+  font-size: 0.82em; color: var(--secondary);
+}
+
+/* ── Rewards button on home ── */
+.btn-rewards {
+  background: linear-gradient(135deg, var(--gold), #f59e0b);
+  color: #1a1040; font-weight: 900;
+  border: none; border-radius: var(--radius);
+  padding: 14px 24px; font-size: 1.05em;
+  cursor: pointer; width: 100%;
+  transition: transform 0.1s;
+  box-shadow: 0 4px 16px rgba(255,215,0,0.3);
+}
+
+.btn-rewards:active { transform: scale(0.96); }
