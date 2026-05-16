@@ -411,7 +411,7 @@ function launchMCQ(spell) {
     </div>
   `;
 
-  startDuelTimer(15, () => duelTimesUp('mcq'));
+  startDuelTimer(40, () => duelTimesUp('mcq'));
 }
 
 function duelMCQSelect(idx, el) {
@@ -481,7 +481,7 @@ function launchSpeedTap(spell) {
 
   // Bubbles float around
   startBubbleAnimation();
-  startDuelTimer(10, () => duelTimesUp('speedtap'));
+  startDuelTimer(30, () => duelTimesUp('speedtap'));
 }
 
 function startBubbleAnimation() {
@@ -551,7 +551,7 @@ function launchOrder(spell) {
   `;
 
   document.getElementById('duel-check-btn').style.display = 'inline-block';
-  startDuelTimer(20, () => duelTimesUp('order'));
+  startDuelTimer(50, () => duelTimesUp('order'));
 }
 
 function orderTapStep(stepIdx, listIdx, el) {
@@ -605,7 +605,7 @@ function launchFillIn(spell) {
     <div id="fillin-result"></div>
   `;
 
-  startDuelTimer(12, () => duelTimesUp('fillin'));
+  startDuelTimer(34, () => duelTimesUp('fillin'));
 }
 
 function fillInSelect(val, el) {
