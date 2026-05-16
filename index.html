@@ -8,11 +8,10 @@
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: HOME
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-home" class="screen active">
-    <div class="home-bg-stars"></div>
     <div class="title-card">
       <div class="wizard-emoji-home" id="home-wizard">🧙‍♂️</div>
       <h1>FractoQuest</h1>
@@ -26,21 +25,24 @@
       <button class="btn btn-primary" onclick="showScreen('screen-mode')">
         ⚔️ Play
       </button>
-      <button class="btn btn-rewards" onclick="showScreen('screen-rewards'); updateDailyStatus(); Rewards.updateCoinDisplays();">
+      <button class="btn btn-rewards"
+              onclick="showScreen('screen-rewards')">
         🎁 Rewards Hub
       </button>
-      <button class="btn btn-secondary" onclick="showScreen('screen-tutorial')">
+      <button class="btn btn-secondary"
+              onclick="showScreen('screen-tutorial')">
         📖 How to Play
       </button>
-      <button class="btn btn-secondary" onclick="showScreen('screen-scores')">
+      <button class="btn btn-secondary"
+              onclick="showScreen('screen-scores')">
         🏆 High Scores
       </button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: MODE SELECT
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-mode" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
@@ -66,18 +68,19 @@
         <p>60 seconds, max score!</p>
         <div class="mode-progress" id="speed-best">Best: --</div>
       </div>
-      <div class="mode-card duel-mode-card" onclick="showScreen('screen-duel-setup')">
+      <div class="mode-card duel-mode-card"
+           onclick="showScreen('screen-duel-setup')">
         <div class="mode-icon">🆚</div>
         <h3>Battle Duel</h3>
-        <p>Fight an opponent!</p>
+        <p>Spell battles vs opponent!</p>
         <div class="mode-progress">⚡ PvP or vs CPU</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: DUEL SETUP
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-duel-setup" class="screen">
     <div class="screen-header">
       <button class="btn-back" onclick="showScreen('screen-mode')">← Back</button>
@@ -87,7 +90,7 @@
     <!-- Fighter Cards -->
     <div class="duel-setup-fighters">
       <!-- Player 1 -->
-      <div class="fighter-setup-card">
+      <div class="fighter-setup-card p1-card">
         <div class="fighter-avatar" id="p1-avatar">🧙‍♂️</div>
         <div class="fighter-setup-label">Player 1</div>
         <input id="p1-name" class="fighter-name-input" type="text"
@@ -104,7 +107,7 @@
       <div class="vs-badge">VS</div>
 
       <!-- Player 2 / CPU -->
-      <div class="fighter-setup-card">
+      <div class="fighter-setup-card p2-card">
         <div class="fighter-avatar" id="p2-avatar">🤖</div>
         <div class="fighter-setup-label" id="p2-label">Opponent</div>
         <input id="p2-name" class="fighter-name-input" type="text"
@@ -154,17 +157,17 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-start-duel" onclick="startDuel()">
+    <button class="btn btn-start-duel" onclick="startDuel()">
       ⚔️ Start Battle!
     </button>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: DUEL BATTLE
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-duel" class="screen">
 
-    <!-- Round Banner (shown between rounds) -->
+    <!-- Round Banner -->
     <div id="round-banner" class="round-banner" style="display:none">
       <div id="round-banner-text" class="round-banner-text"></div>
     </div>
@@ -179,11 +182,11 @@
           <div class="duel-hp-bar-wrap">
             <div class="duel-hp-bar" id="p1-hp-bar" style="width:100%"></div>
           </div>
-          <div class="duel-hp-text" id="p1-hp-text">❤️ 5</div>
+          <div class="duel-hp-text" id="p1-hp-text">❤️❤️❤️❤️❤️</div>
         </div>
       </div>
 
-      <!-- Round Counter -->
+      <!-- Round Counter (center) -->
       <div class="duel-round-info">
         <div class="duel-round-num" id="duel-round-display">R1</div>
         <div class="duel-score-board">
@@ -199,9 +202,10 @@
         <div class="duel-fighter-info" style="align-items:flex-end">
           <div class="duel-fighter-name" id="p2-hud-name">Rival</div>
           <div class="duel-hp-bar-wrap">
-            <div class="duel-hp-bar p2-bar" id="p2-hp-bar" style="width:100%"></div>
+            <div class="duel-hp-bar p2-bar" id="p2-hp-bar"
+                 style="width:100%"></div>
           </div>
-          <div class="duel-hp-text" id="p2-hp-text">❤️ 5</div>
+          <div class="duel-hp-text" id="p2-hp-text">❤️❤️❤️❤️❤️</div>
         </div>
         <div class="duel-avatar" id="p2-hud-avatar">🤖</div>
       </div>
@@ -220,49 +224,45 @@
       </div>
     </div>
 
-    <!-- Duel Question -->
-    <div class="duel-question-area">
-      <div class="duel-question-label" id="duel-q-label">Simplify:</div>
-      <div class="duel-question-display" id="duel-q-display"></div>
+    <!-- Dynamic Mini-game Area -->
+    <div id="duel-main-area"
+         style="width:100%;max-width:500px;
+                display:flex;flex-direction:column;gap:8px;
+                overflow-y:auto;flex:1;">
     </div>
 
-    <!-- Answer Timer Bar (simultaneous pressure) -->
-    <div class="duel-timer-wrap">
+    <!-- Timer Bar -->
+    <div class="duel-timer-wrap" id="duel-timer-wrap">
       <div class="duel-timer-bar" id="duel-timer-bar"></div>
       <div class="duel-timer-text" id="duel-timer-text">15s</div>
     </div>
 
     <!-- Whose turn prompt -->
     <div class="duel-turn-prompt" id="duel-turn-prompt">
-      <span id="duel-turn-name">Wizard</span>'s turn to answer!
+      <span id="duel-turn-name">Wizard</span>'s turn!
     </div>
 
-    <!-- MCQ Options -->
-    <div class="duel-mcq-grid" id="duel-mcq-grid"></div>
-
-    <!-- Duel Hint -->
-    <div class="duel-actions">
-      <button class="btn btn-hint" id="duel-hint-btn" onclick="duelUseHint()">
+    <!-- Action Buttons -->
+    <div class="duel-actions" id="duel-actions">
+      <button class="btn btn-hint" id="duel-hint-btn"
+              onclick="duelUseHint()">
         💡 Hint (−1 ❤️)
       </button>
       <button class="btn btn-check" id="duel-check-btn"
               onclick="submitDuelAnswer()" style="display:none">
-        ⚔️ Attack!
+        ⚔️ Cast!
       </button>
     </div>
 
-    <!-- CPU Thinking Indicator -->
-    <div id="cpu-thinking" class="cpu-thinking" style="display:none">
-      🤖 Calculating... <span id="cpu-dots">.</span>
-    </div>
-
-    <!-- Quit -->
-    <button class="duel-quit-btn" onclick="confirmQuitDuel()">✕ Forfeit</button>
+    <!-- Quit button -->
+    <button class="duel-quit-btn" onclick="confirmQuitDuel()">
+      ✕ Forfeit
+    </button>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: DUEL RESULT
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-duel-result" class="screen">
     <div class="duel-result-card">
       <div class="result-trophy" id="result-trophy">🏆</div>
@@ -279,26 +279,30 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: TUTORIAL
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-tutorial" class="screen">
     <div class="screen-header">
-      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <button class="btn-back"
+              onclick="showScreen('screen-home')">← Back</button>
       <h2>📖 How to Play</h2>
     </div>
     <div class="tutorial-slides" id="tutorial-slides"></div>
     <div class="tutorial-nav">
-      <button class="btn btn-secondary" onclick="tutorialPrev()">← Prev</button>
+      <button class="btn btn-secondary"
+              onclick="tutorialPrev()">← Prev</button>
       <span id="tutorial-page">1 / 6</span>
-      <button class="btn btn-secondary" onclick="tutorialNext()">Next →</button>
+      <button class="btn btn-secondary"
+              onclick="tutorialNext()">Next →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: MAIN GAME
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-game" class="screen">
+
     <!-- HUD -->
     <div class="hud">
       <div class="hud-left">
@@ -320,13 +324,19 @@
     <div class="spell-area">
       <div class="wizard-container">
         <div class="wizard-sprite" id="wizard-sprite">🧙‍♂️</div>
-        <div class="speech-bubble" id="speech-bubble" style="display:none"></div>
+        <div class="speech-bubble" id="speech-bubble"
+             style="display:none"></div>
       </div>
       <div class="question-number" id="question-number">Q 1 / 5</div>
     </div>
 
-    <!-- Streak display -->
-    <div id="streak-display" class="streak-display" style="display:none"></div>
+    <!-- Streak Display -->
+    <div id="streak-display" class="streak-display"
+         style="display:none"></div>
+
+    <!-- Inventory Bar (power-ups usable mid-game) -->
+    <div id="inventory-bar" class="inventory-bar"
+         style="display:none"></div>
 
     <!-- Question Card -->
     <div class="question-card" id="question-card">
@@ -335,7 +345,7 @@
       <div class="step-hint" id="step-hint" style="display:none"></div>
     </div>
 
-    <!-- Progress bar -->
+    <!-- Progress Bar -->
     <div class="progress-bar-container">
       <div class="progress-bar" id="progress-bar"></div>
     </div>
@@ -345,9 +355,8 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
-      <button class="btn btn-hint" id="btn-hint" onclick="showHint()">
-        💡 Hint (−5pts)
-      </button>
+      <button class="btn btn-hint" id="btn-hint"
+              onclick="showHint()">💡 Hint (−5pts)</button>
       <button class="btn btn-check" id="btn-check"
               onclick="checkAnswer()" style="display:none">
         ✓ Cast Spell!
@@ -355,19 +364,22 @@
     </div>
 
     <!-- Feedback Overlay -->
-    <div class="feedback-overlay" id="feedback-overlay" style="display:none">
-      <div class="feedback-box" id="feedback-box">
+    <div class="feedback-overlay" id="feedback-overlay"
+         style="display:none">
+      <div class="feedback-box">
         <div class="feedback-emoji" id="feedback-emoji"></div>
         <div class="feedback-msg" id="feedback-msg"></div>
-        <div class="feedback-explanation" id="feedback-explanation"></div>
-        <button class="btn btn-primary" onclick="nextQuestion()">Next →</button>
+        <div class="feedback-explanation"
+             id="feedback-explanation"></div>
+        <button class="btn btn-primary"
+                onclick="nextQuestion()">Next →</button>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: LEVEL COMPLETE
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-level-complete" class="screen">
     <div class="complete-card">
       <div class="complete-emoji" id="complete-emoji">🎉</div>
@@ -384,12 +396,13 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: HIGH SCORES
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-scores" class="screen">
     <div class="screen-header">
-      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <button class="btn-back"
+              onclick="showScreen('screen-home')">← Back</button>
       <h2>🏆 High Scores</h2>
     </div>
     <div id="scores-list" class="scores-list"></div>
@@ -398,77 +411,107 @@
     </button>
   </div>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ═══════════════════════════════════════════
        SCREEN: REWARDS HUB
-  ═══════════════════════════════════════ -->
+  ═══════════════════════════════════════════ -->
   <div id="screen-rewards" class="screen">
     <div class="screen-header">
-      <button class="btn-back" onclick="showScreen('screen-home')">← Back</button>
+      <button class="btn-back"
+              onclick="showScreen('screen-home')">← Back</button>
       <h2>🎁 Rewards Hub</h2>
       <div class="coin-display" id="rewards-coin-display">🪙 0</div>
     </div>
-    <div class="rewards-grid">
-      <div class="reward-hub-card"
-           onclick="SpellShop.render(); showPanel('panel-shop')">
-        <div class="rh-icon">🏪</div>
-        <div class="rh-name">Spell Shop</div>
-        <div class="rh-desc">Spend coins on upgrades</div>
-      </div>
-      <div class="reward-hub-card"
-           onclick="BadgeSystem.renderCabinet(); showPanel('panel-badges')">
-        <div class="rh-icon">🏅</div>
-        <div class="rh-name">Badge Cabinet</div>
-        <div class="rh-desc">Your achievements</div>
-      </div>
-      <div class="reward-hub-card" onclick="PotionCraft.open()">
-        <div class="rh-icon">🧪</div>
-        <div class="rh-name">Potion Craft</div>
-        <div class="rh-desc">Solve equations, brew potions</div>
-      </div>
-      <div class="reward-hub-card" onclick="TreasureHunt.open()">
-        <div class="rh-icon">🗺️</div>
-        <div class="rh-name">Treasure Hunt</div>
-        <div class="rh-desc">Crack algebraic codes</div>
-      </div>
-      <div class="reward-hub-card" onclick="FractionForge.open()">
-        <div class="rh-icon">⚒️</div>
-        <div class="rh-name">Fraction Forge</div>
-        <div class="rh-desc">Build the correct fraction</div>
-      </div>
-      <div class="reward-hub-card daily-card"
-           onclick="handleDailyChallenge()">
-        <div class="rh-icon">📅</div>
-        <div class="rh-name">Daily Challenge</div>
-        <div class="rh-desc" id="daily-status">+25 🪙 bonus!</div>
-      </div>
+
+    <!-- Rewards Tabs -->
+    <div class="rewards-tabs">
+      <button class="rewards-tab active"
+              onclick="switchRewardsTab('missions')">📅 Missions</button>
+      <button class="rewards-tab"
+              onclick="switchRewardsTab('shop')">🏪 Shop</button>
+      <button class="rewards-tab"
+              onclick="switchRewardsTab('mastery')">📈 Mastery</button>
+      <button class="rewards-tab"
+              onclick="switchRewardsTab('badges')">🏅 Badges</button>
+      <button class="rewards-tab"
+              onclick="switchRewardsTab('games')">🎮 Games</button>
     </div>
 
-    <!-- Shop Panel -->
-    <div id="panel-shop" class="reward-panel" style="display:none">
-      <div class="panel-header">
-        <h3>🏪 Spell Shop</h3>
-        <button class="btn-close" onclick="showPanel(null)">✕</button>
+    <!-- Tab: Missions -->
+    <div id="tab-missions" class="rewards-tab-content active">
+      <div class="tab-title">
+        📅 Daily Missions — refreshes every day
+      </div>
+      <div id="mission-list" class="mission-list"></div>
+    </div>
+
+    <!-- Tab: Shop -->
+    <div id="tab-shop" class="rewards-tab-content">
+      <div class="tab-title">
+        🏪 Power-Up Shop — real gameplay help!
       </div>
       <div id="shop-msg" class="shop-msg"></div>
       <div id="shop-items" class="shop-grid"></div>
     </div>
 
-    <!-- Badge Panel -->
-    <div id="panel-badges" class="reward-panel" style="display:none">
-      <div class="panel-header">
-        <h3>🏅 Badge Cabinet</h3>
-        <button class="btn-close" onclick="showPanel(null)">✕</button>
+    <!-- Tab: Mastery -->
+    <div id="tab-mastery" class="rewards-tab-content">
+      <div class="tab-title">
+        📈 Your Skill Progress
+      </div>
+      <div id="mastery-cards" class="mastery-list"></div>
+    </div>
+
+    <!-- Tab: Badges -->
+    <div id="tab-badges" class="rewards-tab-content">
+      <div class="tab-title">
+        🏅 Badge Cabinet
       </div>
       <div id="badge-grid" class="badge-grid"></div>
     </div>
+
+    <!-- Tab: Side Games -->
+    <div id="tab-games" class="rewards-tab-content">
+      <div class="tab-title">
+        🎮 Side Games — earn extra coins
+      </div>
+      <div class="side-games-grid">
+        <div class="side-game-hub-card"
+             onclick="PotionCraft.open()">
+          <div class="sg-hub-icon">🧪</div>
+          <div class="sg-hub-name">Potion Craft</div>
+          <div class="sg-hub-desc">Solve equations → earn 🪙</div>
+        </div>
+        <div class="side-game-hub-card"
+             onclick="TreasureHunt.open()">
+          <div class="sg-hub-icon">🗺️</div>
+          <div class="sg-hub-name">Treasure Hunt</div>
+          <div class="sg-hub-desc">Crack codes → open chests</div>
+        </div>
+        <div class="side-game-hub-card"
+             onclick="FractionForge.open()">
+          <div class="sg-hub-icon">⚒️</div>
+          <div class="sg-hub-name">Fraction Forge</div>
+          <div class="sg-hub-desc">Build the fraction → earn 🪙</div>
+        </div>
+        <div class="side-game-hub-card daily-card"
+             onclick="handleDailyChallenge()">
+          <div class="sg-hub-icon">📅</div>
+          <div class="sg-hub-name">Daily Challenge</div>
+          <div class="sg-hub-desc" id="daily-status">
+            +25 🪙 bonus!
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       OVERLAYS & POPUPS
-  ═══════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════
+       GLOBAL OVERLAYS & POPUPS
+  ═══════════════════════════════════════════ -->
 
   <!-- Badge Detail Modal -->
-  <div id="badge-detail-modal" class="modal-overlay" style="display:none"
+  <div id="badge-detail-modal" class="modal-overlay"
+       style="display:none"
        onclick="if(event.target===this)this.style.display='none'">
     <div class="modal-box">
       <div id="bd-icon" class="bd-icon"></div>
@@ -483,7 +526,7 @@
     </div>
   </div>
 
-  <!-- Badge Popup (slide-up notification) -->
+  <!-- Badge Unlock Popup (slide up) -->
   <div id="badge-popup" class="badge-popup">
     <div class="badge-popup-inner">
       <div id="badge-popup-icon" class="bp-icon"></div>
@@ -494,15 +537,19 @@
     </div>
   </div>
 
-  <!-- Toast -->
+  <!-- Global Toast -->
   <div id="toast" class="toast"></div>
 
-  <!-- Potion Craft Overlay -->
-  <div id="screen-potion" class="side-game-overlay" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       SIDE GAME: POTION CRAFT
+  ═══════════════════════════════════════════ -->
+  <div id="screen-potion" class="side-game-overlay"
+       style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
         <h3>🧪 Potion Craft</h3>
-        <button class="btn-close" onclick="PotionCraft.close()">✕</button>
+        <button class="btn-close"
+                onclick="PotionCraft.close()">✕</button>
       </div>
       <div class="coin-display" id="potion-coin-display">🪙 0</div>
       <div id="potion-flask" class="potion-flask"></div>
@@ -512,45 +559,62 @@
       </div>
       <div id="potion-attempts" class="potion-attempts"></div>
       <div id="potion-options" class="potion-options"></div>
-      <div id="potion-steps" class="potion-steps" style="display:none"></div>
+      <div id="potion-steps" class="potion-steps"
+           style="display:none"></div>
       <div id="potion-result" class="potion-result"></div>
       <div class="sg-actions">
         <button class="btn btn-secondary"
-                onclick="PotionCraft.nextPuzzle()">Next 🔄</button>
+                onclick="PotionCraft.nextPuzzle()">
+          Next Puzzle 🔄
+        </button>
         <button class="btn btn-secondary"
                 onclick="PotionCraft.close()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- Treasure Hunt Overlay -->
-  <div id="screen-treasure" class="side-game-overlay" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       SIDE GAME: TREASURE HUNT
+  ═══════════════════════════════════════════ -->
+  <div id="screen-treasure" class="side-game-overlay"
+       style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
         <h3>🗺️ Treasure Hunt</h3>
-        <button class="btn-close" onclick="TreasureHunt.close()">✕</button>
+        <button class="btn-close"
+                onclick="TreasureHunt.close()">✕</button>
       </div>
       <div class="coin-display" id="treasure-coin-display">🪙 0</div>
-      <p class="sg-subtitle">Crack the algebraic code to unlock each chest!</p>
+      <p class="sg-subtitle">
+        Crack the algebraic code to unlock each chest!
+      </p>
       <div id="treasure-map" class="treasure-map"></div>
       <div id="treasure-puzzle" class="treasure-puzzle"
            style="display:none"></div>
       <button class="btn btn-secondary"
-              onclick="TreasureHunt.close()" style="margin-top:12px">Close</button>
+              onclick="TreasureHunt.close()"
+              style="margin-top:12px">Close</button>
     </div>
   </div>
 
-  <!-- Fraction Forge Overlay -->
-  <div id="screen-forge" class="side-game-overlay" style="display:none">
+  <!-- ═══════════════════════════════════════════
+       SIDE GAME: FRACTION FORGE
+  ═══════════════════════════════════════════ -->
+  <div id="screen-forge" class="side-game-overlay"
+       style="display:none">
     <div class="side-game-box">
       <div class="sg-header">
         <h3>⚒️ Fraction Forge</h3>
-        <button class="btn-close" onclick="FractionForge.close()">✕</button>
+        <button class="btn-close"
+                onclick="FractionForge.close()">✕</button>
       </div>
       <div class="coin-display" id="forge-coin-display">🪙 0</div>
       <div id="forge-question" class="forge-q"></div>
       <div id="forge-given" class="forge-given"></div>
+
+      <!-- Build Zone -->
       <div class="forge-build">
+        <!-- Numerator -->
         <div class="forge-slot-area">
           <div class="forge-slot-label">Numerator</div>
           <div id="forge-num-pieces" class="forge-pieces"></div>
@@ -558,7 +622,10 @@
             <div id="forge-num-slot" class="forge-slot">?</div>
           </div>
         </div>
+
         <div class="forge-divider-line"></div>
+
+        <!-- Denominator -->
         <div class="forge-slot-area">
           <div class="forge-slot-label">Denominator</div>
           <div id="forge-den-pieces" class="forge-pieces"></div>
@@ -567,8 +634,11 @@
           </div>
         </div>
       </div>
+
       <div id="forge-result" class="forge-result"></div>
-      <div id="forge-hint-text" class="forge-hint" style="display:none"></div>
+      <div id="forge-hint-text" class="forge-hint"
+           style="display:none"></div>
+
       <div class="sg-actions">
         <button class="btn btn-hint"
                 onclick="FractionForge.showHint()">💡 Hint</button>
@@ -580,15 +650,13 @@
     </div>
   </div>
 
-  <!-- Duel Attack Animation Overlay -->
-  <div id="attack-overlay" class="attack-overlay" style="display:none">
-    <div id="attack-animation" class="attack-animation"></div>
-  </div>
-
-  <!-- scripts -->
+  <!-- ═══════════════════════════════════════════
+       SCRIPTS — order matters!
+  ═══════════════════════════════════════════ -->
   <script src="questions.js"></script>
   <script src="game.js"></script>
   <script src="duel.js"></script>
   <script src="rewards.js"></script>
+
 </body>
 </html>

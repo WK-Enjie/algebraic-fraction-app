@@ -1653,3 +1653,495 @@ h1 {
   .duel-question-display { font-size: 1.5em; }
   .duel-arena         { min-height: 110px; }
 }
+
+/* ==================== SPELL SELECT ==================== */
+.spell-select-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.spell-select-title {
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95em;
+  color: var(--secondary);
+}
+
+.mp-display {
+  font-size: 0.85em;
+  margin-top: 4px;
+  color: var(--text-dim);
+}
+
+.spell-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.spell-card {
+  background: var(--card2);
+  border: 2px solid var(--spell-color, var(--primary));
+  border-radius: 14px;
+  padding: 12px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.2s;
+}
+
+.spell-card:active { transform: scale(0.95); background: rgba(255,255,255,0.05); }
+
+.spell-card.spell-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.spell-icon { font-size: 2em; margin-bottom: 4px; }
+.spell-name { font-size: 0.88em; font-weight: 700; margin-bottom: 3px; }
+.spell-desc { font-size: 0.68em; color: var(--text-dim); margin-bottom: 5px; line-height: 1.4; }
+.spell-stats{ font-size: 0.7em; color: var(--secondary); }
+
+.pass-device-note {
+  text-align: center;
+  font-size: 0.78em;
+  color: var(--text-dim);
+  padding: 6px;
+  border: 1px dashed var(--primary);
+  border-radius: 8px;
+}
+
+/* Spell Announce */
+.spell-announce {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  animation: pop 0.4s ease;
+}
+
+.spell-announce-icon { font-size: 4em; }
+.spell-announce-name { font-size: 1.8em; font-weight: 900; color: var(--secondary); margin: 8px 0; }
+.spell-announce-desc { font-size: 0.9em; color: var(--text-dim); }
+
+/* ==================== DUEL MAIN AREA ==================== */
+#duel-main-area {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.minigame-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.minigame-spell-icon { font-size: 1.5em; }
+.minigame-title      { font-size: 0.82em; font-weight: 700; color: var(--secondary); }
+
+.duel-q-label   { font-size: 0.75em; color: var(--text-dim); text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+.duel-q-display { font-size: 1.25em; font-weight: 700; text-align: center; background: var(--card); border-radius: 12px; padding: 12px; }
+
+/* ==================== SPEED TAP ==================== */
+.speedtap-arena {
+  position: relative;
+  height: 160px;
+  background: var(--card2);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--primary);
+}
+
+.speedtap-bubble {
+  position: absolute;
+  background: var(--primary);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+  padding: 4px;
+  border: 2px solid var(--primary-light);
+  transform: translate(-50%, -50%);
+}
+
+.speedtap-bubble:active { transform: translate(-50%, -50%) scale(0.9); }
+.tap-correct { background: var(--success) !important; border-color: var(--success) !important; animation: pop 0.3s; }
+.tap-wrong   { background: var(--danger)  !important; border-color: var(--danger) !important; }
+
+/* ==================== ORDER STEPS ==================== */
+.order-question {
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 700;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.order-arranged {
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 8px;
+  min-height: 50px;
+  border: 2px dashed var(--primary);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-drop-hint {
+  font-size: 0.75em;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 8px 0;
+}
+
+.order-placed-chip {
+  background: var(--primary);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 0.78em;
+  color: white;
+}
+
+.order-remaining {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.order-step-chip {
+  background: var(--card2);
+  border: 1px solid var(--primary);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 0.78em;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.order-step-chip:active { transform: scale(0.97); }
+.chip-selected { opacity: 0.3; pointer-events: none; }
+
+/* ==================== FILL IN ==================== */
+.fillin-display {
+  font-size: 1.2em;
+  font-weight: 700;
+  text-align: center;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.fillin-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.fillin-chip {
+  background: var(--card2);
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  font-size: 1em;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.fillin-chip.selected  { border-color: var(--secondary); background: rgba(245,158,11,0.15); }
+.fillin-explain        { font-size: 0.8em; color: var(--secondary); text-align: center; padding: 6px; background: rgba(245,158,11,0.1); border-radius: 8px; }
+
+/* ==================== DUEL EXPLANATION ==================== */
+.duel-explanation {
+  background: var(--card2);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid var(--primary);
+  font-size: 0.78em;
+  max-height: 130px;
+  overflow-y: auto;
+}
+
+.duel-exp-header {
+  font-weight: 700;
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.exp-correct { background: rgba(16,185,129,0.2); color: var(--success); }
+.exp-wrong   { background: rgba(239,68,68,0.15); color: var(--danger); }
+.duel-exp-body { font-size: 0.95em; line-height: 1.6; }
+
+/* ==================== REWARDS TABS ==================== */
+.rewards-tabs {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.rewards-tab {
+  background: var(--card2);
+  border: 1px solid var(--card2);
+  border-radius: 20px;
+  color: var(--text-dim);
+  font-size: 0.72em;
+  padding: 7px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.rewards-tab.active {
+  background: var(--primary);
+  border-color: var(--primary-light);
+  color: white;
+}
+
+.rewards-tab-content {
+  display: none;
+  width: 100%;
+  max-width: 500px;
+}
+
+.rewards-tab-content.active { display: block; }
+
+.tab-title {
+  font-size: 0.82em;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* ==================== MISSIONS ==================== */
+.mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mission-card {
+  background: var(--card2);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.mission-card.mission-done    { border-color: var(--gold); }
+.mission-card.mission-claimed { opacity: 0.5; }
+
+.mission-icon { font-size: 1.6em; flex-shrink: 0; }
+
+.mission-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mission-text     { font-size: 0.82em; font-weight: 600; }
+.mission-bar-wrap { background: var(--card); border-radius: 4px; height: 6px; overflow: hidden; }
+.mission-bar      { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 4px; transition: width 0.5s; }
+.mission-progress { font-size: 0.7em; color: var(--text-dim); }
+
+.mission-reward       { flex-shrink: 0; text-align: center; }
+.mission-coins-preview{ font-size: 0.78em; color: var(--text-dim); }
+.mission-claimed-label{ font-size: 0.75em; color: var(--success); }
+
+.btn-claim {
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #1a1040;
+  cursor: pointer;
+  animation: pulse-streak 1s ease infinite;
+}
+
+/* ==================== MASTERY ==================== */
+.mastery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mastery-card {
+  background: var(--card2);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid transparent;
+}
+
+.mastery-card.mastery-weak {
+  border-color: var(--danger);
+  background: rgba(239,68,68,0.08);
+}
+
+.mastery-topic-icon { font-size: 1.5em; flex-shrink: 0; }
+
+.mastery-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mastery-topic    { font-size: 0.82em; font-weight: 700; }
+.mastery-bar-wrap { background: var(--card); border-radius: 4px; height: 7px; overflow: hidden; }
+.mastery-bar      { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.mastery-label    { font-size: 0.72em; font-weight: 600; }
+.mastery-detail   { font-size: 0.68em; color: var(--text-dim); }
+
+.btn-practice-weak {
+  background: var(--danger);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ==================== SHOP (Updated) ==================== */
+.shop-how-helps {
+  font-size: 0.67em;
+  color: var(--success);
+  margin-bottom: 3px;
+  line-height: 1.3;
+}
+
+.shop-stock {
+  font-size: 0.72em;
+  color: var(--secondary);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.btn-cannot-afford {
+  background: var(--card) !important;
+  color: var(--text-dim) !important;
+  cursor: not-allowed !important;
+}
+
+/* ==================== INVENTORY BAR ==================== */
+.inventory-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(108,63,197,0.15);
+  border: 1px dashed var(--primary);
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.inv-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card2);
+  border-radius: 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border: 1px solid var(--primary);
+  transition: transform 0.15s;
+  gap: 2px;
+}
+
+.inv-item:active { transform: scale(0.92); }
+.inv-icon  { font-size: 1.3em; }
+.inv-count { font-size: 0.65em; color: var(--secondary); font-weight: 700; }
+
+/* ==================== BADGE IMPROVEMENTS ==================== */
+.badge-progress-header {
+  grid-column: 1 / -1;
+  font-size: 0.82em;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.badge-progress-bar-wrap {
+  background: var(--card);
+  border-radius: 4px;
+  height: 5px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.badge-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 4px;
+  transition: width 0.5s;
+}
+
+.badge-unlocked-tag {
+  font-size: 0.6em;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+/* ==================== SIDE GAMES GRID ==================== */
+.side-games-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.side-game-hub-card {
+  background: var(--card2);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.side-game-hub-card:active { transform: scale(0.95); }
+.side-game-hub-card.daily-card { border-color: var(--gold); }
+
+.sg-hub-icon { font-size: 2em; margin-bottom: 4px; }
+.sg-hub-name { font-weight: 700; font-size: 0.88em; margin-bottom: 3px; }
+.sg-hub-desc { font-size: 0.72em; color: var(--text-dim); }
